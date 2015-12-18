@@ -1,0 +1,85 @@
+<div class="tab">
+							  <div class="tab-head margin-top">
+							    <ul class="tab-nav">
+							      <li class="active"><a href="#tab-start">个人信息</a></li>
+							      <li><a href="#tab-article">文章</a></li>
+							      <li><a href="#tab-favorite">收藏</a></li>
+							  	</ul>
+							  </div>
+							  <div class="tab-body bg-white">
+							    <div class="tab-panel active" id="tab-start">
+							    	<!-- 个人信息 -->
+							    	<ul class="list-unstyle height">
+							    		<li class="margin-large-bottom">
+											<blockquote>
+											  <p><{$cur_user.user_signature|default=' '}></p>
+											</blockquote>
+										</li>
+										<li class="margin-large-bottom">
+											<div class="media media-x">
+											  <div class="float-left">等级：<{$cur_user.user_level|default=1}></div>
+											  <div class="media-body">
+											    <div class="progress margin-small-top">
+												  <div class="progress-bar" style="width:<{$cur_user['user_integral']*100 / ($cur_user['user_level']*50) |default=0}>%;"><{$cur_user['user_integral']*100 / ($cur_user['user_level']*50) |default=0}>%</div>
+												</div>
+											   </div>
+											</div>
+										</li>
+										
+										<li class="margin-large-bottom">
+											<div class="xl10 x1-move margin-top media-inline">
+											  <div class="media clearfix">
+											    <div class="txt-border txt-large radius-circle border-yellow"><div class="txt radius-circle bg-yellow"><{$cur_user.user_rank|default=0}></div></div>
+											    <div class="media-body"> 
+											    	<center><strong>排名</strong></center>
+											    </div>
+											  </div>
+											  <div class="media clearfix">
+											    <div class="txt-border txt-large radius-circle border-red"><div class="txt radius-circle bg-red"><{$cur_user.user_visited|default=0}></div></div>
+											    <div class="media-body"> 
+											    	<center><strong>访问</strong></center>
+											    </div>
+											  </div>
+											  <div class="media clearfix">
+											    <div class="txt-border txt-large radius-circle border-green"><div class="txt radius-circle bg-green"><{$followNum|default=0}></div></div>
+											    <div class="media-body"> 
+											    	<center><strong>关注</strong></center>
+											    </div>
+											  </div>
+											  <div class="media clearfix">
+											    <div class="txt-border txt-large radius-circle border-blue"><div class="txt radius-circle bg-blue"><{$fanNum|default=0}></div></div>
+											    <div class="media-body"> 
+											    	<center><strong>粉丝</strong></center>
+											    </div>
+											  </div>
+											</div>
+										</li>
+									</ul>
+
+							    </div>
+							    <div class="tab-panel padding" id="tab-article">
+							    	<!-- 文章 -->
+							    	<ul class="list-group">
+							    	<if condition='$articlesNum neq 0'>
+							    	<volist name="articles" id="article">
+									  <li class="margin"><span class="float-right text-small text-gray"><{$article.article_readnum|default=0}>人阅读&nbsp;&nbsp;&nbsp;<{$article.article_cmtnum|default=0}>人评论</span><a href="__APP__/article/<{$article.article_id}>.html" target="_blank"><{$article.article_title}></a></li>
+									</volist>
+									<else/>
+										<li class="margin"><span class="text-gray">抱歉，没有文章</span></li>
+									</if>
+									</ul>
+							    </div>
+							    <div class="tab-panel padding" id="tab-favorite">
+							    	<!-- 收藏 -->
+							    	<ul class="list-group">
+							    	<if condition='$articlesNum neq 0'>
+							    	<volist name="articles" id="article">
+									  <li class="margin"><span class="float-right text-small text-gray"><{$article.article_readnum|default=0}>人阅读&nbsp;&nbsp;&nbsp;<{$article.article_cmtnum|default=0}>人评论</span><a href="__APP__/article/<{$article.article_id}>.html" target="_blank"><{$article.article_title}></a></li>
+									</volist>
+									<else/>
+										<li class="margin"><span class="text-gray">抱歉，没有文章</span></li>
+									</if>
+									</ul>
+							    </div>
+							  </div>
+							</div>

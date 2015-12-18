@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <title>Alpha Blog<{$pagetitle}></title>
+    <meta name="keywords" content="<{$keywords}>" />
+    <meta name="description" content="<{$description}>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="__PUBLIC__/css/pintuer.css">
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <script src="__PUBLIC__/js/pintuer.js"></script>
+    <script src="__PUBLIC__/js/respond.js"></script>
+
+    <script src="__PUBLIC__/js/chargeOp.js"></script>
+  </head>
+
+<body class="bg-white">
+
+  	<div class="layout">
+
+  		<div class="layout bg-black bg-inverse hidden-l">
+		    <div class="container-layout height-big">
+		        <span class="float-right"><a href="javascript:;" onclick="logoutCharge()">注销</a>   </span>欢迎使用 Alpha Blog
+		    </div>
+		</div>
+  		<div class="bg-main" style="min-height:80px;" ></div>
+
+	    <div class="xs12 line">
+
+				<!--left-->
+				<div class="xs1 bg-white float-left text-center">
+				  	<div class="bg-sub bg-inverse list-link border-white">
+					  <a href="?charge=index" class="active">首页</a>
+					  <a href="?charge=message">通知</a>
+					  <a href="?charge=user">用户</a>
+					  <a href="?charge=article">文章</a>
+					</div>
+				</div>
+					
+				<!--right-->
+				<div class="xs11 bg-white padding-small-top padding-small-right float-right" style="min-height:100px;">
+
+					<table class="table table-bordered margin-top">
+						<tr><th>序号</th><th>ID</th><th>用户名</th><th>email</th><th>signature</th><th>checked</th>
+							<th>visit</th><th>积分</th><th>级别</th><th>rank</th><th>操作</th></tr>
+
+						<volist name="users" id="user">
+							<tr><td><{$i}></td><td><{$user.user_id}></td><td><{$user.user_name}></td><td><{$user.user_email}></td><td><{$user.user_signature}></td><td><{$user.user_checked}></td>
+							<td><{$user.user_visited}></td><td><{$user.user_integral}></td><td><{$user.user_level}></td><td><{$user.user_rank}></td>
+							<td>
+								<button type="button" class="button" onclick="notifyUser(this, <{$user.user_id}>)">
+									<span class="icon-bell text-blue"></span>通知</button>
+								<button type="button" class="button" onclick="deleteUser(this, <{$user.user_id}>)">
+									<span class="icon-trash-o text-red"></span>删除</button>
+							</td></tr>
+						</volist>
+					</table>
+
+					<div align="right margin-big-top">
+						<ul class="bg-white pagination pagination-group">
+						  <if condition="$currentpage gt 1">
+						  		<li><a href="?page=<{$currentpage-1}>">上一页</a></li>
+						  </if>
+						  <if condition="$currentpage lt $pagenum">
+						  		<li><a href="?page=<{$currentpage+1}>">下一页</a></li>
+						  </if>
+						</ul>
+					</div>
+
+				</div>										  
+						  
+		</div><!-- end container -->
+
+	</div>
+</body>
+</html>

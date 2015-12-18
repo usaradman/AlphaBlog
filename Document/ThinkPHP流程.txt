@@ -1,0 +1,31 @@
+1. ThinkPHP.class.php
+2. runtime.php
+(
+load_runtime_file();
+// 记录加载文件时间
+G('loadTime');
+// 执行入口
+Think::Start();
+)
+
+3. Think.class.php
+(
+Think::buildApp();         // 预编译项目
+App::run();
+)
+
+4. App.class.php
+(
+ App::init();
+ 		------>
+ 				// 加载动态项目公共文件和配置
+ 				load_ext_file();
+		        // URL调度
+		        Dispatcher::dispatch();
+		        
+
+// Session初始化
+session(C('SESSION_OPTIONS'));
+App::exec();
+)
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <title>Alpha Blog<{$pagetitle}></title>
+    <meta name="keywords" content="<{$keywords}>" />
+    <meta name="description" content="<{$description}>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="__PUBLIC__/css/pintuer.css">
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <script src="__PUBLIC__/js/pintuer.js"></script>
+    <script src="__PUBLIC__/js/respond.js"></script>
+    <script src="__PUBLIC__/js/chargeOp.js"></script>
+  </head>
+
+  <body class="bg-white">
+
+  	<div class="layout">
+
+  		<div class="layout bg-black bg-inverse hidden-l">
+		    <div class="container-layout height-big">
+		        <span class="float-right"><a href="javascript:;"></a>   </span>欢迎使用 Alpha Blog
+		    </div>
+		</div>
+  		<div class="navbar bg-main" style="min-height:80px;" ></div>
+
+	    <div class="xs12 line margin-large-top">
+
+				<div class="xs4 x4-move bg-white float-left text-center">
+					  	<form id="loginForm" method="post" action="__APP__/Charge/loginCharge" class="form-x form-auto">
+							<div class="form-group">
+								<div class="label">
+								  <label for="username">账号</label>
+								</div>
+								<div class="field field-icon-right">
+								  <input type="text" class="input" id="username" name="name" size="30" placeholder="账号" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="label">
+								  <label for="password">密码</label>
+								</div>
+								<div class="field field-icon-right">
+								  <input type="password" class="input" id="password" name="passwd" size="30" placeholder="请输入密码" />
+								</div>
+							</div>
+
+							<div class="form-button"><button class="button" type="submit">登录</button></div>
+						</form>
+				</div>
+														  
+						  
+		</div><!-- end container -->
+
+	</div>
+</body>
+</html>

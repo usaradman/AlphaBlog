@@ -1,0 +1,81 @@
+	<include file="./Home/Tpl/default/Include/header.html"/>
+  
+	
+    <div class="container" style="margin-top:20px; ">
+			<!-- main body -->
+			<div class="line">
+				<div class="xs10 x1-move">	
+					  <!--left-->
+					  <div class="xl8" style="padding-right:6px;">
+							
+							<ul class="list-unstyle">
+								<li>
+									<!--导航-->
+									<ul class="bread bg-white" >
+									  <li><a href="__APP__" class="icon-home"> Home</a></li>
+									  <li><{$type}></li>
+									  <li><{$typevalue}></li>
+									</ul>
+								</li>
+								
+								<volist name="articles" id="article">
+									<li>
+										<div class="panel bg-white margin-bottom radius-none border-white">
+											<div class="panel-body padding">
+												<div class="media media-x bg-white">
+												  <a class="float-left" href="__APP__/user/<{$article.article_authorId}>">
+													<img src="<{:U('User/getUserHeaderFromUserId',array('userId'=>$article['author']['user_id']))}>" width="64" height="64" class="img-border radius-small" alt="<{$article.author.user_name|default=''}>">
+												  </a>
+												  <div class="media-body">
+													<a href="__APP__/article/<{$article.article_id}>.html">
+														<p class="text-big"><{$article.article_title}></p>
+													</a>
+													<br/>
+													<p class="height text-gray"><{$article.article_content|msubstr=0,600,'utf-8',false|escape=###|strip_tags=###}></p>
+												   </div>
+												</div>
+											</div>
+											<div class="panel-foot bg-white padding-small border-none">
+													<span class="icon-folder-open text-small" />
+													<a href="__APP__/articles/category/<{$article.article_category}>"><span class="tag bg-white"><span class="text-gray"><{$article.article_category}></span></span></a>
+													<volist name="tags" id="tag">
+														<if condition="($tag.tag_id+1)%2 eq 0">
+															<a href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-blue"><{$tag.tag_name}></span></a>
+														<else />
+															<a href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-green"><{$tag.tag_name}></span></a>
+														</if>
+														
+													</volist>
+
+													<div class="float-right">
+													<p class="text-right">
+														<span class="float-right text-small text-gray"><{$article.article_readnum|default=0}>人阅读&nbsp;&nbsp;&nbsp;<{$article.article_cmtnum|default=0}>人评论&nbsp;&nbsp;&nbsp;</span>
+													</p>
+													</div>
+											</div>
+										</div>
+									</li>
+
+								</volist>
+
+								<li>&nbsp;</li>
+							</ul>
+							<!--分页-->
+							<div align="right">
+								<ul class="pagination pagination-group" style="background-color:#FFFFFF;">
+								  <if condition="$currentpage gt 1">
+								  		<li><a href="?page=<{$currentpage-1}>">上一页</a></li>
+								  </if>
+								  <if condition="$currentpage lt $pagenum">
+								  		<li><a href="?page=<{$currentpage+1}>">下一页</a></li>
+								  </if>
+								</ul>
+							</div>
+					  </div>
+
+					  <include file="./Home/Tpl/default/Include/right.html"/>
+					  
+				</div>
+			</div>		  
+		  
+			<include file="./Home/Tpl/default/Include/footer.html"/>

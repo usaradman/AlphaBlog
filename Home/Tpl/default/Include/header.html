@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <title>Alpha Blog<{$pagetitle}></title>
+    <meta name="keywords" content="<{$keywords}>" />
+    <meta name="description" content="<{$description}>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__APP__/kindeditor/plugins/code/prettify.css" rel="Stylesheet" type="text/css" />
+    <link rel="stylesheet" href="__PUBLIC__/css/pintuer.css">
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <script src="__PUBLIC__/js/pintuer.js"></script>
+    <script src="__PUBLIC__/js/respond.js"></script>
+    <script src="__PUBLIC__/js/ajaxfileupload.js"></script>
+    <script src="__PUBLIC__/js/globaloperate.js"></script>
+  </head>
+  <script>
+  	function check(){
+  		var cmd = eval(document.getElementById('searchbox')).value;
+  		if(cmd!=''){
+  			return true;
+  		}
+  		return false;
+  	}
+  </script>
+  <body  style="background: #f0f0f0;">
+		<!-- header -->
+		<div class="layout bg hidden-l">
+		  <div class="container-layout height-big">
+		    <span class="float-right">
+		    	<if condition="$Think.session.LoginUser gt 0">
+		    	  <a href="__APP__/UserHome/index.html"><{$Think.session.LoginUser.user_name|default=''}></a>
+			      <span class="text-little text-gray">|</span>
+			      <a href="__APP__/logout">注销</a>
+			      <span class="text-little text-gray"></span>
+			      <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+		    	<else />
+	    		  <a href="__APP__/Login.html">登录&nbsp;</a>
+			      <span class="text-little text-gray">|</span>
+			      <a href="__APP__/regist.html">&nbsp;注册</a>
+			      <span class="text-little text-gray"></span>
+			      <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+		    	</if>
+		    </span>
+		    <{$Think.session.LoginUser.user_name.','|default=''}> 欢迎使用 Alpha Blog
+		  </div>
+		</div>
+		<div class="bg-white" style="border-bottom: 1px solid rgba(0,0,0,0.2);">
+		<div class="container padding-big-top padding-big-bottom" >
+		  <div class="line-middle">
+		  <div class="xl11">
+			<div class="xl9"><a href="__APP__"><img src="__PUBLIC__/images/logo-gray.png" alt="拼图" /></a></div>
+			<div class="xl3">
+			  <form id="search-form" method="get" action="__APP__/articles/search" onsubmit="javascript:return check()">
+				<div class="input-group padding-little-top">
+				  <input type="text" id="searchbox" class="input" name="keywords" size="30" placeholder="关键词" />
+				  <span class="addbtn"><button type="submit" class="button">搜索</button></span>
+				</div>
+			  </form>
+			</div>
+		  </div>
+		  </div>
+		</div>
+		</div>
+	<!--End header-->

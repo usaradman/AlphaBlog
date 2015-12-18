@@ -1,0 +1,107 @@
+
+  	<include file="./Home/Tpl/default/Include/header.html"/>
+	
+    <div class="container margin-large-top">
+			<!-- main body -->
+			<div class="line">
+				<div class="xs12">	
+					  <!--left-->
+					  <div class="xl3 padding-small-right">
+						  <div class="media media-y margin-top padding bg-white">
+							<img id="user_icon" src="__PUBLIC__/../Upload/user/images/head/<{$cur_user.user_headicon|default='logo-64.ico'}>"  class="img-border" alt="User">
+						  <div class="media-body">
+						  	<div class="text-big text-center margin-top"><strong><{$cur_user.user_name|default='User Name'}></strong></div>
+						  	<div class="bg-white margin-top padding-large-left">
+							  	<center>
+								<div class="align-center text-small margin-large-left">
+								  <p><span class="icon-trophy"></span>&nbsp;&nbsp;排名：<{$cur_user.user_rank|default=0}></p>
+								  <p><span class="icon-eye"></span>&nbsp; 访问：<{$cur_user.user_visited|default=0}></p>
+								  <p><span class="icon-user"></span>&nbsp;&nbsp;关注：<{$followNum|default=0}></p>
+								  <p><span class="icon-user"></span>&nbsp;&nbsp;粉丝：<{$fanNum|default=0}></p>
+								</div>
+								</center>
+							</div>
+						  </div>
+						</div>
+
+						<div class="bg-white radius text-left text-gray padding margin-top"><{$cur_user.user_signature|default=''}></div>
+
+						<div class="bg-white padding margin-top">
+							<center>
+							  <a href="#"><button class="button border-green"><span class="icon-comment-o text-green margin-small-right"></span><b>留言</b></button></a>
+							  <a href="#"><button class="button tips border-blue margin-big-left" data-toggle="click" data-place="top" title="" content="关注成功" data-target="#user_icon" ><span class="icon-plus text-blue margin-small-right"></span><b>关注</b></button></a>
+							</center>
+						</div>
+
+						<!-- 分类 -->
+						<div class="panel margin-top bg-white border-white">
+						  <div class="panel-head"><strong>分类</strong></div>
+						  <ul class="list-group">
+						  	<volist name="categories" id="category">
+								<li><a href="#"><span class="icon-dot-circle-o"></span>&nbsp;&nbsp;<{$category.category_name}><span class="float-right badge"><{$category.category_size}></span></a></li>
+							</volist>
+						  </ul>
+						</div>
+
+					  </div>
+					  <!--right-->
+					  <div class="xl9">
+					  		<ul style="list-style:none;">
+
+								<volist name="articles" id="article">
+									<li>
+										<div class="panel bg-white margin-bottom radius-none border-white">
+											<div class="panel-body padding">
+												<div class="media media-x bg-white">
+												  <div class="media-body">
+													<a href="__APP__/article/<{$article.article_id}>.html">
+														<p class="text-big"><{$article.article_title}></p>
+													</a>
+													<br/>
+													<p class="height text-gray"><{$article.article_content|msubstr=0,600,'utf-8',false|escape=###|strip_tags=###}></p>
+												   </div>
+												</div>
+											</div>
+											<div class="panel-foot bg-white padding-small border-none">
+													<span class="icon-folder-open text-small" />
+													<a href="__APP__/articles/category/<{$article.article_category}>"><span class="tag bg-white"><span class="text-gray"><{$article.article_category}></span></span></a>
+													<volist name="tags" id="tag">
+														<if condition="($tag.tag_id+1)%2 eq 0">
+															<a href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-blue"><{$tag.tag_name}></span></a>
+														<else />
+															<a href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-green"><{$tag.tag_name}></span></a>
+														</if>
+														
+													</volist>
+
+													<div class="float-right">
+													<p class="text-right">
+														<span class="float-right text-small text-gray"><{$article.article_readnum|default=0}>人阅读&nbsp;&nbsp;&nbsp;<{$article.article_cmtnum|default=0}>人评论&nbsp;&nbsp;&nbsp;</span>
+													</p>
+													</div>
+											</div>
+										</div>
+									</li>
+
+								</volist>
+
+								<li>&nbsp;</li>
+							</ul>
+							
+					  </div>
+					  <!--分页-->
+					  <div align="right">
+						<ul class="pagination pagination-group bg-white">
+						  <if condition="$currentpage gt 1">
+						  		<li><a href="__APP__/user/<{$cur_user.user_id}>?page=<{$currentpage-1}>">上一页</a></li>
+						  </if>
+						  <if condition="$currentpage lt $pagenum">
+						  		<li><a href="__APP__/user/<{$cur_user.user_id}>?page=<{$currentpage+1}>">下一页</a></li>
+						  </if>
+						</ul>
+					  </div>
+
+			</div>
+		</div>		  
+		  
+		<include file="./Home/Tpl/default/Include/footer.html"/>

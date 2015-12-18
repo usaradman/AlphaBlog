@@ -1,0 +1,132 @@
+	<include file="./Home/Tpl/default/Include/header.html"/>
+  
+	<style>
+		img{
+			max-width: 100%;
+		}
+	</style>
+    <div class="container margin-big-top">
+			<!-- main body -->
+			<div class="line padding-large-right padding-large-left">
+				<div class="xs12 padding-large-right padding-large-left">	
+					  <!--left-->
+					  <div class="xl8 padding-right">
+						<ul style="list-style:none;">
+							<li>
+								<!--导航-->
+								<ul class="bread bg-white" >
+								  <li><a href="__APP__" class="icon-home"> Home</a></li>
+								  <li>正文</li>
+								</ul>
+							</li>
+							<li>
+								<div class="detail text-default height margin-big-bottom bg-white padding-big-top padding-big-bottom padding-large-left padding-large-right">
+									<center><h1 class="margin-top" ><{$article.article_title}></h1></center><br/>
+									<center>
+										<h5 class="text-small text-gray">时间：<{$article.article_createdate}> 
+											&nbsp;作者：<a class="text-blue text-small" href="__APP__/user/<{$article.article_authorId}>"><{$article.article_author}></a>
+											&nbsp;来源：Insist Blog
+										</h5>
+									</center>
+									<br/><br/>
+									<!--
+									<p><center><img src="__PUBLIC__/../Upload/images/article/<{$article.article_originpic|default='bg.jpg'}>" class="radius" style="max-width:80%; " /></center></p>
+									-->
+									
+									<{$article.article_content}>
+									
+									<br/><br/>
+									<blockquote class="border-main">
+									  <strong>Tips</strong>
+									  <p>Here are something special.</p>
+									</blockquote>
+
+									<!-- 分享 -->
+									<br/><br/>
+									<div class="float-right">
+										<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+										<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"<{$article.article_title}>","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+										</script>
+
+
+
+										&nbsp;&nbsp;&nbsp;
+									</div>
+									<br/>
+								</div>
+								
+							</li>
+							<!-- 分享 -->
+							<li>
+								<div class="pane padding margin-bottom bg-white">
+									<div class="pane-body">
+										<span>标签：</span>
+										<volist name="tags" id="tag">
+											<a class="margin-right" href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-blue"><{$tag.tag_name}></span></a>
+										</volist>
+									</div>
+								</div>
+							</li>
+							<!--评论列表-->
+							<li>
+								<ul class="list-group margin-bottom bg-white" >
+									<volist name="comments" id="com" >
+										<li>
+											<div class="media media-x">
+											  <a class="float-left" href="__APP__/user/<{$com.comment_userid}>">
+												<img src="<{:U('User/getUserHeaderFromUserId',array('userId'=>$com['comment_userid']))}>" width="64" height="64" class="img-border radius-circle" alt="">
+											  </a>
+											  <div class="media-body">
+												<p class="text-gray text-small margin-bottom"><{$com.comment_username|default='未知用户'}> • <{$com.comment_createdate}></p>
+												<{$com.comment_content}>
+											  </div>
+											</div>
+										</li>
+										
+									</volist>
+
+								</ul>
+							</li>
+							<!--评论-->
+							<li>
+								<form name="addcomform" action="__URL__/addComment/id/<{$article.article_id}>" method="post">
+									 <div class="label"><label for="readme"></label></div>
+										<div class="field">
+										  	<textarea id="com_editor_id" name="com_content" placeholder="说些什么...（登录后评论）" style="width: 100%; height: 200px" name="content" ></textarea>
+
+											<script charset="utf-8" src="__APP__/kindeditor/kindeditor.js"></script>
+											<script charset="utf-8" src="__APP__/kindeditor/lang/zh_CN.js"></script>
+											<script charset="utf-8" src="__APP__/kindeditor/plugins/code/prettify.js"></script>
+											
+											<script>
+											        var editor;
+													KindEditor.ready(function(K) {
+														editor = K.create('#com_editor_id', {
+															resizeType : 1,
+															allowPreviewEmoticons : false,
+															allowImageUpload : false,
+															autoHeightMode : true,
+															items : [
+																'bold', 'italic', 'underline',
+																'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'link', 'code']
+														});
+													});
+													prettyPrint();
+											</script>
+
+
+										  <input type="hidden" name="articleId" value="<{$article.article_id}>"/>
+										</div>
+										<br/>
+									 <div class="form-button"><button class="button float-right" type="submit">评论</button></div>
+								</form>
+							</li>
+					  </div>
+					  
+					  
+					  <include file="./Home/Tpl/default/Include/right.html"/>
+					  
+				</div>
+			</div>		  
+		  
+			<include file="./Home/Tpl/default/Include/footer.html"/>

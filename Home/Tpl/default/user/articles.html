@@ -1,0 +1,141 @@
+	<include file="./Home/Tpl/default/Include/header.html"/>
+  
+	
+    <div class="container" >
+			<!-- main body -->
+			<div class="line">
+				<div class="xs10 x1-move" >	
+					<div class="media media-y" height="100px;" style="margin-top:80px;">
+					  <a href="#">
+						<img src="__PUBLIC__/../Upload/user/images/head/<{$Think.session.LoginUser.user_headicon|default='logo-64.ico'}>" width="100" height="100" class="img-border radius-circle" alt="User">
+						<!-- __PUBLIC__/../Upload/images/headicon/logo-64.ico -->
+					  </a>
+					  <div class="media-body">
+						<p style="color: #fff;text-align: center;text-shadow: 0 0 4px rgba(0,0,0,0.5);vertical-align: text-bottom;"><{$Think.session.LoginUser.user_name.','|default='User Name'}></p><br/>
+						<div class="text-center" style="font: 12px/1.3; color: #fff;text-align: center;text-shadow: 0 0 4px rgba(0,0,0,0.5);vertical-align: text-bottom;"><{$Think.session.LoginUser.user_signature.','|default=' '}></div><br/><br/>
+					  </div>
+					</div>
+				</div>
+
+				<div class="xs10 x1-move" >	
+					<button class="button icon-navicon margin-small-bottom" data-target="#nav-bg3"></button>
+					<div class="bg-blue bg-inverse radius nav-navicon" id="nav-bg3">
+						<ul class="nav nav-inline nav-menu nav-split nav-justified">
+							  <li class="active"><a href="#">我的主页</a></li>
+							  <li><a href="#">我的文章</a></li>
+							  <li><a href="#">管理中心</a></li>			  	
+						</ul>
+					</div>
+				</div>
+
+				<div class="xs10 x1-move">	
+					<!--left-->
+					<div class="xs4 padding-small float-left">
+
+						<!--卡片-->
+						<div class="xs12 radius padding margin-top" style="background-color:#FFFFFF;">
+							<button class="button icon-navicon" data-target="#nav-link5"></button>
+							<ul class="nav nav-inline nav-split nav-justified nav-navicon" id="nav-link5">
+							  		<li>
+							  			<div class="media media-x clearfix radius text-center">
+										    <div class="media-body"><a href="#"><strong><{$articleNumber|default=0}></strong>文章</a></div>
+										 </div>
+							  		</li>
+								    <li>
+							  			<div class="media media-x clearfix radius text-center">
+										    <div class="media-body"><a href="#"><strong>2312</strong>关注</a></div>
+										 </div>
+							  		</li>
+							  		<li>
+							  			<div class="media media-x clearfix radius text-center">
+										    <div class="media-body"><a href="#"><strong>2312</strong>粉丝</a></div>
+										 </div>
+							  		</li>
+							</ul>
+						</div>
+
+						<!--卡片-->
+						<div class="xs12 radius padding margin-top text-center" style="background-color:#FFFFFF;">
+						    <a href="__APP__/Article/add" class="button text-blue padding">添加文章</a>
+						    <a href="#" class="button text-green padding margin-left">添加分类</a>
+						    <a href="#" class="button text-green padding margin-left">修改文章</a>
+						</div>
+						
+
+
+					</div>
+					<!--end left-->
+
+					<!--right-->
+					<div class="xs8 padding-small float=right">
+						<ul style="list-style:none;">
+
+						<volist name="articles" id="article">
+
+								<li>
+									<div class="panel"  style="margin-bottom:6px; background:#FFFFFF;">
+										<div class="panel-head padding-small text-right" style="background-color:#FFFFFF;">
+											<a href="__APP__/Article/edit/id/<{$article.article_id}>" class="button text-yellow margin-left">修改</a>
+						    				<a href="__APP__/Article/delete/id/<{$article.article_id}>" class="button text-red margin-left">删除</a>
+										</div>
+										<div class="panel-body">
+											<div class="media media-x" style="background:#FFFFFF; padding:5px;">
+											  <a class="float-left" href="__APP__/articles/username/<{$article.article_author}>">
+												<img src="<{:U('User/getUserHeaderFromUserId',array('userId'=>$article['author']['user_id']))}>" width="64" height="64" class="img-border radius-circle" alt="<{$article.author.user_name|default=''}>">
+											  </a>
+											  <div class="media-body">
+												<a href="__APP__/Article/id/<{$article.article_id}>.html" target="_blank">
+													<strong>
+														<p class="text-blue"><{$article.article_title}></p>
+													</strong>
+												</a>
+												<br/>
+												<p class="text-gray"><{$article.article_content|msubstr=0,600,'utf-8',false|strip_tags=###|trim=###}></p>
+												</div>
+											</div>
+										</div>
+										<div class="panel-foot">
+												<a href="__APP__/articles/category/<{$article.article_category}>"><span class="tag bg-gray"><{$article.article_category}></span></a>
+												<volist name="tags" id="tag">
+													<if condition="($tag.tag_id+1)%2 eq 0">
+														<a href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-blue"><{$tag.tag_name}></span></a>
+													<else />
+														<a href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-green"><{$tag.tag_name}></span></a>
+													</if>
+													
+												</volist>
+
+												<div class="float-right">
+												<p class="text-right"><small><{$article.article_createdate|substr=0,10}></small></p>
+												</div>
+										</div>
+									</div>
+								</li>
+
+							</volist>
+								
+								<li>&nbsp;</li>
+							</ul>
+							<!--分页-->
+							<div align="right">
+								<ul class="pagination pagination-group" style="background-color:#FFFFFF;">
+								  <if condition="$currentpage gt 1">
+								  		<li><a href="__APP__/UserHome/page/<{$currentpage-1}>">上一页</a></li>
+								  </if>
+								  <if condition="$currentpage lt $pagenum">
+								  		<li><a href="__APP__/UserHome/page/<{$currentpage+1}>">下一页</a></li>
+								  </if>
+								</ul>
+							</div>
+					</div>
+
+
+				</div>
+
+			</div>
+											  
+					  
+				</div>
+			</div>		  
+		  
+			<include file="./Home/Tpl/default/Include/footer.html"/>

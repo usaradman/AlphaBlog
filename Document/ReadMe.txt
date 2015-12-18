@@ -1,0 +1,2 @@
+解压ThinkPHP放在根目录
+解压KindEditor放在根目录

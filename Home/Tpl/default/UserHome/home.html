@@ -1,0 +1,153 @@
+	<include file="./Home/Tpl/default/Include/header.html"/>
+  
+	
+    <div class="container" >
+			<!-- main body -->
+			<div class="line">
+				<div class="xs10 x1-move" >	
+					<div class="media media-y" height="100px;" style="margin-top:80px;">
+					  <a href="#">
+						<img src="__PUBLIC__/../Upload/user/images/head/<{$Think.session.LoginUser.user_headicon|default='logo-64.ico'}>" width="100" height="100" class="img-border radius-circle" alt="User">
+					  </a>
+					  <div class="media-body">
+						<p style="color: #fff;text-align: center;text-shadow: 0 0 4px rgba(0,0,0,0.5);vertical-align: text-bottom;"><{$Think.session.LoginUser.user_name.','|default='User Name'}></p><br/>
+
+						<div class="text-center" style="font: 12px/1.3; color: #fff;text-align: center;text-shadow: 0 0 4px rgba(0,0,0,0.5);vertical-align: text-bottom;"><{$Think.session.LoginUser.user_signature.','|default=' '|msubstr=0,100,'utf-8',false}></div><br/>
+					  </div>
+					</div>
+				</div>
+
+				<div class="xs10 x1-move" >	
+					<button class="button icon-navicon margin-small-bottom" data-target="#nav-bg3"></button>
+					<div class="bg-blue bg-inverse radius nav-navicon" id="nav-bg3">
+						<ul class="nav nav-inline nav-menu nav-split nav-justified">
+							  <li class="active"><a href="#">我的主页</a></li>
+							  <li><a href="__APP__/UserHome/articles.html">我的文章</a></li>
+							  <li><a href="__APP__/UserHome/manage.html">管理中心</a></li>			  	
+						</ul>
+					</div>
+				</div>
+
+				<div class="xs10 x1-move">	
+					<!--left-->
+					<div class="xs4 padding-small float-left">
+
+						<!--卡片-->
+						<div class="xs12 radius padding margin-top bg-white">
+							<button class="button icon-navicon" data-target="#nav-link5"></button>
+							<ul class="nav nav-inline nav-split nav-justified nav-navicon" id="nav-link5">
+							  		<li>
+							  			<div class="media media-x clearfix radius text-center">
+										    <div class="media-body"><a href="#"><strong><{$articleNumber|default=0}></strong>文章</a></div>
+										 </div>
+							  		</li>
+								    <li>
+							  			<div class="media media-x clearfix radius text-center">
+										    <div class="media-body"><a href="#"><strong><{$followNum|default=0}></strong>关注</a></div>
+										 </div>
+							  		</li>
+							  		<li>
+							  			<div class="media media-x clearfix radius text-center">
+										    <div class="media-body"><a href="#"><strong><{$fanNum|default=0}></strong>粉丝</a></div>
+										 </div>
+							  		</li>
+							</ul>
+						</div>
+
+						<!--卡片-->
+						<div class="xs12 radius padding margin-top text-center bg-white">
+							<div class="progress">
+							  <div class="progress-bar bg-yellow" style="width:<{$_SESSION['LoginUser']['user_integral']*100 / ($_SESSION['LoginUser']['user_level']*50) |default=0}>%;">等级：<{$_SESSION['LoginUser']['user_level']|default=1}></div>
+							</div>
+						</div>
+
+						<!-- 发布文章 -->
+						<div class="xs12 panel margin-top bg-white border-white">
+						  <div class="panel-body"><center><a href="__APP__/article/add.html"><button class="button button-big bg-green"><span class="icon-pencil"></span>&nbsp;发&nbsp;布&nbsp;文&nbsp;章</button></a></center></div>
+						</div>
+
+						<!-- 分类 -->
+						<div class="xs12 panel margin-top bg-white border-white">
+						  <div class="panel-head"><strong>分类</strong></div>
+						  <ul class="list-group">
+						  	<volist name="categories" id="category">
+								<li><a href="#"><span class="icon-dot-circle-o"></span>&nbsp;&nbsp;<{$category.category_name}><span class="float-right badge"><{$category.category_size}></span></a></li>
+							</volist>
+						  </ul>
+						</div>
+
+
+					</div>
+					<!--end left-->
+
+					<!--right-->
+					<div class="xs8 padding-small-left margin-big-top float-right" style="min-height:500px;">
+						<div class="panel bg-white border-white">
+						  <div class="panel-head bg-gray-light border-white"><strong>未读消息通知</strong></div>
+						  <div class="panel-body">
+							<ul class="list-unstyle">
+								<!-- Messages -->
+								<volist name="messages" id="msg">
+									<if condition="($msg.checked eq 0) AND ($msg.type eq 1)" >
+										<li class="margin-bottom">
+											<div class="alert alert-yellow"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="标记已读" onclick="markMessageChecked(<{$msg.id}>)" ></span><strong>系统通知：</strong><{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
+										</li>
+									<elseif condition="($msg.checked eq 0) AND ($msg.type eq 2)"/>
+										<li class="margin-bottom">
+											<div class="alert alert-green"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="标记已读" onclick="markMessageChecked(<{$msg.id}>)" ></span><strong>留言：</strong><{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
+										</li>
+									<elseif condition="($msg.checked eq 0) AND ($msg.type eq 3)"/>
+										<li class="margin-bottom">
+											<div class="alert alert-green"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="标记已读" onclick="markMessageChecked(<{$msg.id}>)" ></span><strong>新评论：</strong>新评论：<{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
+										</li>
+									<else />
+									</if>
+								</volist>
+							</ul>
+						  </div>
+						</div>
+
+						<div class="panel bg-white border-white margin-top">
+						  <div class="panel-head bg-gray-light border-white"><strong>最新粉丝</strong></div>
+						  <div class="panel-body">
+							<ul class="list-inline">
+								<li class="margin-bottom">
+									<div class="media">
+									  <a href="#">
+									    <img src="__PUBLIC__/images/logo-64.ico" class="img-border radius-circle" />
+									  </a>
+									  <div class="media-body text-center">usar</div>
+									</div>
+								</li>
+								<li class="margin-bottom">
+									<div class="media">
+									  <a href="#">
+									    <img src="__PUBLIC__/images/logo-64.ico" class="img-border radius-circle" />
+									  </a>
+									  <div class="media-body text-center">admin</div>
+									</div>
+								</li>
+								<li class="margin-bottom">
+									<div class="media">
+									  <a href="#">
+									    <img src="__PUBLIC__/images/logo-64.ico" class="img-border radius-circle" />
+									  </a>
+									  <div class="media-body text-center">txt</div>
+									</div>
+								</li>
+							</ul>
+						  </div>
+						</div>
+
+					</div>
+
+
+				</div>
+
+			</div>
+											  
+					  
+				</div>
+			</div>		  
+		  
+			<include file="./Home/Tpl/default/Include/footer.html"/>
