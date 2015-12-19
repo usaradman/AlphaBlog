@@ -223,7 +223,7 @@ class ArticleAction extends Action {
 			//开始更新文章本身
 	        $result = $Form->where('article_id='.$this->_get('id'))->save($data);
 	        if($result) {
-
+	        	//TODO 更新后会有未删除的图片
 	        	$articleImg = M('ArticleImg');
 				$imgPaths = explode("-",$this->_post('paths'));
 				$pathsql = 'insert into '.C('DB_PREFIX').'articleImg values ('.$this->_get('id').', "';
@@ -379,7 +379,6 @@ class ArticleAction extends Action {
 				foreach($delImage as $img){
 					if(trim($img['path'])!=""){
 						$file = dirname(ABSPATH).str_replace('/', '\\',$img['path']);
-
 						if(!unlink($file)){
 							$errorMsg = "图片删除失败，请手动删除 路径：".$file.'<br/>';
 						}
