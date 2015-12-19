@@ -107,7 +107,7 @@
 				    $upload->maxSize  = 3145728;// 设置附件上传大小
 				    $upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
 				    $upload->savePath = './Upload/user/images/head/';// 设置附件上传目录
-				    $upload->saveRule = 'com_create_guid'; // 采用GUID序列命名
+				    $upload->saveRule = 'com_create_guid'; //采用GUID序列命名
 
 				    if(!$upload->upload()) {
 				    	$this->error('图片上传失败！'.$upload->getErrorMsg());
@@ -120,15 +120,22 @@
 				    }
 
 				}else{
-					$data['user_headicon'] = '';
-					$data['user_head'] = file_get_contents('./Upload/user/images/head/logo-64.ico');
+					$data['user_headicon'] = 'icon-head.png';
+					$data['user_head'] = file_get_contents('./Public/images/icon-head.png');
 				}
 
 			    $newUser = D('User');
 				$result = $newUser->add($data);
 				if($result){
 					//TODO 注册成功，发送验证邮件，跳转到验证页面
-					U('Index/index',array(),'html',true);
+					$loginUser = $newUser->where('user_id ='.$result)->select();
+					if($loginUser){
+						session('LoginUser',$loginUser[0]);
+						U('UserHome/index',array(),'html',true);
+					}
+					else{
+						U('Index/index',array(),'html',true);
+					}	
 				}
 				else {
 					//数据库存储失败，删除图片

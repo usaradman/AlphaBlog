@@ -7,7 +7,7 @@
 				<div class="xs10 x1-move" >	
 					<div class="media media-y" height="100px;" style="margin-top:80px;">
 					  <a href="#">
-						<img src="__PUBLIC__/../Upload/user/images/head/<{$Think.session.LoginUser.user_headicon|default='logo-64.ico'}>" width="100" height="100" class="img-border radius-circle" alt="User">
+						<img src="<{:U('User/getUserHeaderFromUserId',array('userId'=>$_SESSION['LoginUser']['user_id']))}>" width="100" height="100" class="img-border radius-circle" alt="User">
 					  </a>
 					  <div class="media-body">
 						<p style="color: #fff;text-align: center;text-shadow: 0 0 4px rgba(0,0,0,0.5);vertical-align: text-bottom;"><{$Think.session.LoginUser.user_name.','|default='User Name'}></p><br/>
@@ -48,7 +48,7 @@
 							<li class="margin-bottom">
 								<div class="media">
 								  <a href="#">
-								    <img src="__PUBLIC__/images/logo-64.ico" class="img-border radius-circle" />
+								    <img src="__PUBLIC__/images/icon-head.png" width="64" height="64"  class="img-border radius-circle" />
 								  </a>
 								  <div class="media-body text-center">usar</div>
 								</div>
@@ -56,17 +56,9 @@
 							<li class="margin-bottom">
 								<div class="media">
 								  <a href="#">
-								    <img src="__PUBLIC__/images/logo-64.ico" class="img-border radius-circle" />
+								    <img src="__PUBLIC__/images/icon-head.png" width="64" height="64"  class="img-border radius-circle" />
 								  </a>
 								  <div class="media-body text-center">admin</div>
-								</div>
-							</li>
-							<li class="margin-bottom">
-								<div class="media">
-								  <a href="#">
-								    <img src="__PUBLIC__/images/logo-64.ico" class="img-border radius-circle" />
-								  </a>
-								  <div class="media-body text-center">txt</div>
 								</div>
 							</li>
 						</ul>
