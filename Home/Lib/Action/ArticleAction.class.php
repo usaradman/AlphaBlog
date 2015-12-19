@@ -348,7 +348,7 @@ class ArticleAction extends Action {
 	 *  删除文章
 	 */
 	public function delete(){
-		if($this->checkAuthority()){
+		if($this->checkAuthority() || isset($_SESSION['LoginCharge'])){
 			$article = D('Article');
 			$delId = $this->_get('id',"strip_tags");
 			$curArticle = $article->where('article_id='.$delId)->select();

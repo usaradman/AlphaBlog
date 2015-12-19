@@ -1,3 +1,6 @@
+//#########################################################################################################
+//#										文章删除
+//#########################################################################################################
 
 
 function deleteArticle(obj, delUrl){
@@ -9,11 +12,11 @@ function deleteArticle(obj, delUrl){
 		        	this.parentNode.removeChild(this);
 		 		}
 		 		else{
-		 			alert("删除失败" + responseData);
+		 			alertMsg("删除失败",responseData);
 		 		}
 		    },
 		    error: function(){
-		    	alert("出错了");
+		    	alertMsg("出错了","");
 		    }
 	  	});
     }
@@ -41,7 +44,7 @@ function addCategory(){
 		categoryName: cName,
 	};
 
-	$.ajax({ url: "UserHome/addCategory", 
+	$.ajax({ url: getRootPath() + "/UserHome/addCategory", 
 	 	context: document.body, 
 	 	data: categoryData, 
 	 	success: function(responseData){
@@ -57,11 +60,11 @@ function addCategory(){
 	        	$("#addCategoryNameInput").val("");
 	 		}
 	 		else{
-	 			alert("添加失败");
+	 			alertMsg("删除失败",responseData);
 	 		}
 	    },
 	    error: function(){
-	    	alert("出错了");
+	    	alertMsg("出错了", "");
 	    }
   	});
 }
@@ -79,7 +82,7 @@ function modifyCategory(obj,id){
 		categoryName: newCategoryName,
 	};
 
-	$.ajax({ url: "UserHome/modifyCategoryName", 
+	$.ajax({ url: getRootPath() + "/UserHome/modifyCategoryName", 
 	 	context: obj.parentNode.parentNode.parentNode.firstChild.nextSibling, 
 	 	data: categoryData, 
 	 	success: function(responseData){
@@ -88,11 +91,11 @@ function modifyCategory(obj,id){
 	        	this.innerHTML = newCategoryName;
 	 		}
 	 		else{
-	 			alert("修改失败");
+	 			alertMsg("修改失败",responseData);
 	 		}
 	    },
 	    error: function(){
-	    	alert("出错了");
+	    	alertMsg("出错了", "");
 	    }
   	});
 
@@ -109,18 +112,18 @@ function deleteCategory(obj, delId, cateSize){
 	var delData = {
 		categoryId:delId, 
 	};
-	$.ajax({ url: "UserHome/deleteCategory", 
+	$.ajax({ url: getRootPath() + "/UserHome/deleteCategory", 
 	 	context: obj.parentNode.parentNode.parentNode.parentNode,
 	 	data: delData, 
 	 	success: function(responseData){
 	 		if(responseData == "true"){
 	 			this.removeChild(obj.parentNode.parentNode.parentNode);
 	 		}else{
-	 			alert("删除失败");
+	 			alertMsg("删除失败",responseData);
 	 		}
 	    },
 	    error: function(){
-	    	alert("出错了");
+	    	alertMsg("出错了", "");
 	    }
   	});
 }
@@ -136,18 +139,18 @@ function markMessageChecked(msgId){
 	var markData = {
 		msgId: msgId,
 	};
-	$.ajax({ url: "UserHome/markMessageChecked", 
+	$.ajax({ url: getRootPath() + "/UserHome/markMessageChecked", 
 	 	context: document.body,
 	 	data: markData, 
 	 	success: function(responseData){
 	 		if(responseData == "true"){
 	 			//Do nothing
 	 		}else{
-	 			console.log("False 标记为已读失败");
+	 			alertMsg("标记失败",responseData);
 	 		}
 	    },
 	    error: function(){
-	    	alert("出错了");
+	    	alertMsg("出错了", "");
 	    }
   	});
 }
@@ -159,18 +162,18 @@ function deleteMessage(msgId){
 	var delData = {
 		msgId: msgId,
 	};
-	$.ajax({ url: "UserHome/deleteMessage", 
+	$.ajax({ url: getRootPath() + "/UserHome/deleteMessage", 
 	 	context: document.body,
 	 	data: delData, 
 	 	success: function(responseData){
 	 		if(responseData == "true"){
 	 			//Do nothing
 	 		}else{
-	 			console.log("False 删除失败");
+	 			alertMsg("删除失败",responseData);
 	 		}
 	    },
 	    error: function(){
-	    	alert("出错了");
+	    	alertMsg("出错了", "");
 	    }
   	});
 }
@@ -201,42 +204,44 @@ function modifyUserSignature(){
 		};
 		$.ajax({ 
 			type: 'POST',
-			url: "UserHome/modifyUserSignature", 
+			url: getRootPath() + "/UserHome/modifyUserSignature", 
 		 	context: currentTextAreaObj.parentNode.parentNode.parentNode.getElementsByClassName("button bg-sub")[0],
 		 	data: sigData, 
 		 	success: function(responseData){
 		 		if(responseData == "true"){
 		 			$(this).attr("disabled","disabled");
 		 		}else{
-		 			alert("修改失败 "+responseData);
+		 			alertMsg("修改失败",responseData);
 		 		}
 		    },
 		    error: function(){
-		    	alert("出错了");
+		    	alertMsg("出错了", "");
 		    }
 	  	});
 	}
 }
 
 
-
+/*
+	修改用户邮箱
+*/
 function modifyUserEmail(){
 	if(currentTextAreaObj !== null && currentTextAreaObj !== undefined){
 		var emailData = {
 			newEmail: currentTextAreaObj.value,
 		};
-		$.ajax({ url: "UserHome/modifyUserEmail", 
+		$.ajax({ url: getRootPath() + "/UserHome/modifyUserEmail", 
 		 	context: currentTextAreaObj.parentNode.parentNode.parentNode.getElementsByClassName("button bg-sub")[0],
 		 	data: emailData, 
 		 	success: function(responseData){
 		 		if(responseData == "true"){
 		 			$(this).attr("disabled","disabled");
 		 		}else{
-		 			alert("修改失败 "+responseData);
+		 			alertMsg("修改失败",responseData);
 		 		}
 		    },
 		    error: function(){
-		    	alert("出错了");
+		    	alertMsg("出错了", "");
 		    }
 	  	});
 	}
@@ -247,26 +252,15 @@ function modifyUserEmail(){
 */
 function modifyUserHeadIcon(btn){
 	$.ajaxFileUpload({  
-        url: "UserHome/modifyUserHeadIcon",
+        url: getRootPath() + "/UserHome/modifyUserHeadIcon",
         secureuri: true,  
         fileElementId: 'uploadimg',     //文件选择框的id属性  
         success: function(responseData){   
             $(btn).attr("disabled","disabled");
         },
         error: function (data, status, e){  
-            alert("出错了");
+            alertMsg("出错了", "");
         }  
     }); 
 }
 
-
-
-//#########################################################################################################
-//#										杂项
-//#########################################################################################################
-
-
-function trim(str){ //删除左右两端的空格
-	if(str=="") return str;
-　　return str.replace(/(^\s*)|(\s*$)/g, "");
-}

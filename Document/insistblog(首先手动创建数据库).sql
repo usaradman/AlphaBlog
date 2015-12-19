@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50090
 File Encoding         : 65001
 
-Date: 2015-12-19 01:00:52
+Date: 2015-12-19 19:59:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,7 @@ CREATE TABLE `usar_article` (
   `article_createdate` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `article_readnum` int(20) NOT NULL default '0' COMMENT '查看次数',
   `article_cmtnum` int(10) NOT NULL default '0' COMMENT '评论次数',
+  `article_baned` tinyint(1) NOT NULL default '0' COMMENT '审核禁止文章，默认为通过',
   PRIMARY KEY  (`article_id`),
   KEY `authorId` (`article_authorId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=159 DEFAULT CHARSET=utf8 COMMENT='存放文章的表，Extra 是存放图片的路径的';
@@ -105,7 +106,7 @@ CREATE TABLE `usar_message` (
   `checked` tinyint(1) NOT NULL default '0' COMMENT '标记消息未读',
   `createtime` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for usar_tag

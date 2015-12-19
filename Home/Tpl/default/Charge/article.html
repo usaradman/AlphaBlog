@@ -10,6 +10,7 @@
     <script src="__PUBLIC__/js/jquery.js"></script>
     <script src="__PUBLIC__/js/pintuer.js"></script>
     <script src="__PUBLIC__/js/respond.js"></script>
+    <script src="__PUBLIC__/js/global.js"></script>
     <script src="__PUBLIC__/js/chargeOp.js"></script>
   </head>
 
@@ -28,17 +29,68 @@
 
 				<!--left-->
 				<div class="xs1 bg-white float-left text-center">
-				  	<div class="bg-sub bg-inverse list-link border-white">
-					  <a href="?charge=index" class="active">首页</a>
+				  	<div class="bg-main bg-inverse list-link border-white">
+					  <a href="?charge=index">首页</a>
 					  <a href="?charge=message">通知</a>
 					  <a href="?charge=user">用户</a>
-					  <a href="?charge=article">文章</a>
+					  <a href="?charge=article" class="active">文章</a>
 					</div>
 				</div>
 					
 				<!--right-->
-				<div class="xs11 bg-sub padding-small-top padding-small-right float-right" style="min-height:100px;">
-					
+				<div class="xs11 padding-small-top padding-small-right padding-large-bottom padding-large-right float-right" style="min-height:100px; background-color:#F0F0F0">
+					<div class="xs12">
+						
+				  		<ul style="list-style:none;">
+				  			<li>
+				  				<div class="alert alert-red margin-small-bottom">
+									<span class="close rotate-hover"></span><strong>注意：</strong>这些是最新的文章。
+								</div>
+				  			</li>
+							<volist name="articles" id="article">
+								<li>
+									<div class="panel margin-small-bottom bg-white radius-none border-white">
+										<div class="panel-body padding">
+											<div class="media media-x bg-white">
+												<div class="button-group float-right">
+													<if condition='$article.article_baned eq 0' >
+														<button type="button" class="button bg-green-light" ban="1" onclick="banArticle(this, <{$article.article_id}>)"><span class="icon-ban text-red"></span> 禁止</button>
+													<else />
+														<button type="button" class="button bg-green" ban="0" onclick="banArticle(this, <{$article.article_id}>)"><span class="icon-check text-red"></span> 解禁</button>
+													</if>
+													<button type="button" class="button bg-yellow-light" onclick="deleteArticle(this, '__APP__/Article/delete/id/<{$article.article_id}>')"><span class="icon-trash-o text-red"></span> 删除</button>
+												</div>
+											  <div class="media-body">
+												<a href="__APP__/Article/<{$article.article_id}>.html" target="_blank">
+														<p class="text-big"><{$article.article_title}></p>
+												</a>
+												<p class="text-right">
+														<span class="text-small text-gray"><a class="text-blue" href="__APP__/user/<{$article['author']['user_id']}>" target="_blank"><{$article['author']['user_name']}></a>&nbsp;&nbsp;&nbsp;&nbsp;<{$article.article_createdate}>&nbsp;&nbsp;&nbsp;<{$article.article_readnum|default=0}>人阅读&nbsp;&nbsp;&nbsp;<{$article.article_cmtnum|default=0}>人评论&nbsp;&nbsp;&nbsp;</span>
+													</p>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</li>
+
+							</volist>
+
+							<li>&nbsp;</li>
+						</ul>
+						
+				  	</div>
+					<!--分页-->
+					<div align="right">
+						<ul class="pagination pagination-group bg-white">
+						  <if condition="$currentpage gt 1">
+						  		<li><a href="__APP__/Charge/index.html?charge=article&page=<{$currentpage-1}>">上一页</a></li>
+						  </if>
+						  <if condition="$currentpage lt $pagenum">
+						  		<li><a href="__APP__/Charge/index.html?charge=article&page=<{$currentpage+1}>">下一页</a></li>
+						  </if>
+						</ul>
+					</div>
 
 
 				</div>										  

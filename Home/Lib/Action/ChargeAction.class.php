@@ -22,7 +22,8 @@ class ChargeAction extends Action {
 				break;
 			}
 			case 'article':{
-
+				$this->assign('articles', 
+					$this->getAllArticles($this->_param('userId', 'htmlspecialchars,strip_tags', -1), $page));
 				break;
 			}
 		}
@@ -44,6 +45,74 @@ class ChargeAction extends Action {
 	}
 
 
+
+//#########################################################################################################
+//#										文章操作
+//#########################################################################################################
+	/**
+	 * 获取所有文章
+	 */
+	private function getAllArticles($userId=-1 , $page=1){
+		$user = M('user');
+		$article = M('article');
+
+		$articles = false;
+		if($userId >= 0){
+			$articles = $article->where('article_authorId ='.$userId)->order('article_createdate DESC')->page($page,15)->select();
+			$this->pagenum = ceil(($article->where('article_authorId ='.$userId)->count())/15);
+		}
+		else{
+			$articles = $article->order('article_createdate DESC')->page($page,15)->select();
+			$this->pagenum = ceil(($article->count())/15);
+		}
+		
+		//设定页面数量
+		if($articles){
+			$articleResult = array();
+            foreach($articles as $art){
+            	//获取作者信息
+            	$userInfo = $user->field('user_id,user_name')->find($art['article_authorId']);
+		        if($userInfo){
+		        	$art['author'] = $userInfo;
+		        }else{
+		            $art['author'] = array();
+		        }
+                $articleResult[] = $art;
+            }
+			return $articleResult;
+		}
+		else{
+			return array();
+		}
+	}
+
+	/**
+	 * 删除文章 在ArticleAction.delete
+	 */
+
+
+	/**
+	 * 审核禁止文章
+	 */
+	public function banArticle($articleId, $isBan){
+		if(!$this->checkAuthority()){
+			echo 'Unauthorized';
+			return;
+		}
+		$article = M('article');
+		$banData['article_baned'] = $isBan;
+		if($article->where("article_id = $articleId")->save($banData)){
+			echo 'true';
+		}
+		else{
+			echo 'false '.$article->getError();
+		}
+	}
+
+
+
+
+
 //#########################################################################################################
 //#										用户操作
 //#########################################################################################################
@@ -52,8 +121,9 @@ class ChargeAction extends Action {
 	/**
 	 * 获取所有用户
 	 */
-	public function getAllUsers($page){
+	private function getAllUsers($page){
 		$user = M('user');
+		$this->pagenum = ceil($user->count()/15);
 		$users = $user->order('user_createdate DESC')->page($page,15)->select();
 		if($users){
 			return $users;

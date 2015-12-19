@@ -31,6 +31,7 @@ $basicConfig = array(
                 'login$'                                => 'Login/index',
                 'regist$'                               => 'Login/regist',
                 'logout$'                               => 'Login/logout',
+                //'admin'                                 => 'Charge/index.html',
              ),
     'DEFAULT_THEME'  => 'default',
     'TMPL_DETECT_THEME' => true, // 自动侦测模板主题

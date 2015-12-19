@@ -1,12 +1,14 @@
+
+/*退出管理登录*/
 function logoutCharge(){
-	$.ajax({ url: "Charge/logoutCharge", 
+	$.ajax({ url: getRootPath() + "/Charge/logoutCharge", 
 	 	success: function(responseData){
 	 		if(responseData == "true"){
 	 			window.location.href="Charge/login";
 	 		}
 	    },
 	    error: function(){
-	    	alert("出错了");
+	    	alertMsg("出错了","");
 	    }
   	});
 }
@@ -25,7 +27,7 @@ function deleteUser(obj, delUserId){
 		var delId = {
 			userId: delUserId,
 		};
-        $.ajax({ url: "Charge/deleteUser", 
+        $.ajax({ url: getRootPath() + "/Charge/deleteUser", 
         	data: delId,
 		 	context: obj.parentNode.parentNode.parentNode,
 		 	success: function(responseData){
@@ -33,11 +35,11 @@ function deleteUser(obj, delUserId){
 		        	this.removeChild(obj.parentNode.parentNode);
 		 		}
 		 		else{
-		 			alert("删除失败" + responseData);
+		 			alertMsg("删除失败",responseData);
 		 		}
 		    },
 		    error: function(){
-		    	alert("出错了");
+		    	alertMsg("出错了","");
 		    }
 	  	});
     }
@@ -53,7 +55,7 @@ function notifyUser(obj, toUserId){
 			userId: toUserId,
 			content: message,
 		};
-		$.ajax({ url: "Charge/notifyUser", 
+		$.ajax({ url: getRootPath() + "/Charge/notifyUser", 
         	data: msgData,
         	type: 'POST',
 		 	context: obj,
@@ -62,7 +64,7 @@ function notifyUser(obj, toUserId){
 		        	//Do nothing
 		 		}
 		 		else{
-		 			alert("失败" + responseData);
+		 			alertMsg("通知失败",responseData);
 		 		}
 		    },
 		    error: function(){
@@ -70,4 +72,85 @@ function notifyUser(obj, toUserId){
 		    }
 	  	});
 	}
+}
+
+
+//#########################################################################################################
+//#										文章禁止 删除
+//#########################################################################################################
+
+/*删除文章*/
+function deleteArticle(obj, delUrl){
+    if (confirm("确认要删除？")) {
+        $.ajax({ url: delUrl, 
+		 	context: obj.parentNode.parentNode.parentNode.parentNode.parentNode,
+		 	success: function(responseData){
+		 		if(responseData == "true"){
+		        	this.parentNode.removeChild(this);
+		 		}
+		 		else{
+		 			alertMsg("删除失败",responseData);
+		 		}
+		    },
+		    error: function(){
+		    	alertMsg("出错了","");
+		    }
+	  	});
+    }
+}
+
+/*审核禁止或解禁文章*/
+function banArticle(obj, artId){
+	var ban = $(obj).attr('ban');
+	if(ban == 1){
+		if (confirm("确认要禁止？")) {
+	    	var banData = {
+	    		articleId: artId,
+	    		isBan: 1,
+	    	};
+	        $.ajax({ url: getRootPath() + "/Charge/banArticle", 
+	        	data : banData,
+			 	context: obj,
+			 	success: function(responseData){
+			 		if(responseData == "true"){
+			        	$(this).html("<span class=\"icon-check text-red\"></span> 解禁");
+			        	$(this).attr('class', 'button bg-green');
+			 			$(obj).attr('ban', '0');
+			 		}
+			 		else{
+			 			alertMsg("禁止失败",responseData);
+			 		}
+			    },
+			    error: function(){
+			    	alertMsg("出错了","");
+			    }
+		  	});
+	    }
+	}
+	else{
+		if (confirm("确认要解除禁止？")) {
+	    	var banData = {
+	    		articleId: artId,
+	    		isBan: 0,
+	    	};
+	        $.ajax({ url: getRootPath() + "/Charge/banArticle", 
+	        	data : banData,
+			 	context: obj,
+			 	success: function(responseData){
+			 		if(responseData == "true"){
+			 			$(this).html("<span class=\"icon-ban text-red\"></span> 禁止");
+			 			$(this).attr('class', 'button bg-green-light');
+			 			$(obj).attr('ban', '1');
+			 		}
+			 		else{
+			 			alertMsg("解禁失败",responseData);
+			 		}
+			    },
+			    error: function(){
+			    	alertMsg("出错了","");
+			    }
+		  	});
+	    }
+	}
+    
 }

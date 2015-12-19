@@ -19,12 +19,12 @@ class IndexAction extends Action {
      */
     protected function show($page=1){
     	$articles = M('article');
-    	$articlenum = $articles->count();
+    	$articlenum = $articles->where('article_baned = 0')->count();
 
     	$this->assign('pagenum', ceil($articlenum/15));
     	$this->assign('currentpage', $page);
 
-    	$result = $articles->page($page,15)->order('article_createdate DESC')->select();
+    	$result = $articles->where('article_baned = 0')->page($page,15)->order('article_createdate DESC')->select();
     	if($result){
             $cate = D('category');
             $FinalResult = array();

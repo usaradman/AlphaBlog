@@ -10,7 +10,7 @@
     <script src="__PUBLIC__/js/jquery.js"></script>
     <script src="__PUBLIC__/js/pintuer.js"></script>
     <script src="__PUBLIC__/js/respond.js"></script>
-
+    <script src="__PUBLIC__/js/global.js"></script>
     <script src="__PUBLIC__/js/chargeOp.js"></script>
   </head>
 
@@ -29,28 +29,30 @@
 
 				<!--left-->
 				<div class="xs1 bg-white float-left text-center">
-				  	<div class="bg-sub bg-inverse list-link border-white">
-					  <a href="?charge=index" class="active">首页</a>
+				  	<div class="bg-main bg-inverse list-link border-white">
+					  <a href="?charge=index">首页</a>
 					  <a href="?charge=message">通知</a>
-					  <a href="?charge=user">用户</a>
+					  <a href="?charge=user" class="active">用户</a>
 					  <a href="?charge=article">文章</a>
 					</div>
 				</div>
 					
 				<!--right-->
 				<div class="xs11 bg-white padding-small-top padding-small-right float-right" style="min-height:100px;">
-
+					<div class="alert alert-red margin-small-bottom">
+						<span class="close rotate-hover"></span><strong>注意：</strong>这些是所有的用户，现在不可以删除。
+					</div>
 					<table class="table table-bordered margin-top">
 						<tr><th>序号</th><th>ID</th><th>用户名</th><th>email</th><th>signature</th><th>checked</th>
 							<th>visit</th><th>积分</th><th>级别</th><th>rank</th><th>操作</th></tr>
 
 						<volist name="users" id="user">
-							<tr><td><{$i}></td><td><{$user.user_id}></td><td><{$user.user_name}></td><td><{$user.user_email}></td><td><{$user.user_signature}></td><td><{$user.user_checked}></td>
+							<tr><td><{$i}></td><td><{$user.user_id}></td><td><a class="text-blue" href="__APP__/user/<{$user.user_id}>" target="_blank"><{$user.user_name}></a></td><td><{$user.user_email}></td><td><{$user.user_signature}></td><td><{$user.user_checked}></td>
 							<td><{$user.user_visited}></td><td><{$user.user_integral}></td><td><{$user.user_level}></td><td><{$user.user_rank}></td>
 							<td>
 								<button type="button" class="button" onclick="notifyUser(this, <{$user.user_id}>)">
 									<span class="icon-bell text-blue"></span>通知</button>
-								<button type="button" class="button" onclick="deleteUser(this, <{$user.user_id}>)">
+								<button type="button" class="button" disabled="disabled" onclick="deleteUser(this, <{$user.user_id}>)">
 									<span class="icon-trash-o text-red"></span>删除</button>
 							</td></tr>
 						</volist>
