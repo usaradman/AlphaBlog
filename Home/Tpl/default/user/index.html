@@ -8,7 +8,10 @@
 					  <!--left-->
 					  <div class="xl3 padding-small-right">
 						  <div class="media media-y margin-top padding bg-white">
-							<img id="user_icon" src="__PUBLIC__/../Upload/user/images/head/<{$cur_user.user_headicon|default='logo-64.ico'}>"  class="img-border" alt="User">
+						  	<!--
+						  	<img id="user_icon" src="__PUBLIC__/../Upload/user/images/head/<{$cur_user.user_headicon|default='logo-64.ico'}>"  class="img-border" alt="User"> -->
+
+							<img id="user_icon" src="<{:U('User/getUserHeaderFromUserId',array('userId'=>$cur_user['user_id']))}>"  class="img-border" alt="<{$cur_user.user_name|default='User Name'}>">
 						  <div class="media-body">
 						  	<div class="text-big text-center margin-top"><strong><{$cur_user.user_name|default='User Name'}></strong></div>
 						  	<div class="bg-white margin-top padding-large-left">

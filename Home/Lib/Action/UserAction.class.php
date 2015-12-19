@@ -11,16 +11,6 @@
 			}
 		}
 
-		//文章界面
-		public function articles(){
-			//$this->display('articles');
-		}
-
-		//个人资料
-		public function profile(){
-			//$this->display('profile');
-		}
-
 		private function getUserInfo($id, $page=1){
 			$user = D('User');
 			$result = $user->where('user_id='.$id)->select();
@@ -71,26 +61,10 @@
 			return false;
 		}
 
-		/*
-		public function getUserHeaderFromString(){
-			$data = base64_decode($this->_get('imgData'));
-			$im = imagecreatefromstring($data);
-			if ($im !== false) {
-			    header('Content-Type: image/jpeg');
-			    imagejpeg($im);
-			    imagedestroy($im);
-			}
-			else{
-				echo 'Error';
-			}
-		}
-		*/
-
 		public function getUserHeaderFromUserId(){
 			$user = D('User');
 			$result = $user->where('user_id='.$this->_get('userId'))->select();
 			if($result){
-				//echo $result[0]['user_head']; die();
 				header('Content-Type: image/jpeg');
 				$im = imagecreatefromstring($result[0]['user_head']);
 				if ($im !== false) {
@@ -100,7 +74,6 @@
 			    	echo 'Error';
 			    }
 			}else{
-
 				$this->error("没有找到".$user->getError());
 			}
 		}

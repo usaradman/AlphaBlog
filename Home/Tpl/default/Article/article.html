@@ -24,14 +24,11 @@
 									<center><h1 class="margin-top" ><{$article.article_title}></h1></center><br/>
 									<center>
 										<h5 class="text-small text-gray">时间：<{$article.article_createdate}> 
-											&nbsp;作者：<a class="text-blue text-small" href="__APP__/user/<{$article.article_authorId}>"><{$article.article_author}></a>
+											&nbsp;作者：<a class="text-blue text-small" href="__APP__/user/<{$article.article_authorId}>.html"><{$article.article_author}></a>
 											&nbsp;来源：Insist Blog
 										</h5>
 									</center>
 									<br/><br/>
-									<!--
-									<p><center><img src="__PUBLIC__/../Upload/images/article/<{$article.article_originpic|default='bg.jpg'}>" class="radius" style="max-width:80%; " /></center></p>
-									-->
 									
 									<{$article.article_content}>
 									
