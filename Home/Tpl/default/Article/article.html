@@ -75,7 +75,7 @@
 											  </a>
 											  <div class="media-body">
 												<p class="text-gray text-small margin-bottom"><{$com.comment_username|default='未知用户'}> • <{$com.comment_createdate}></p>
-												<{$com.comment_content}>
+												<{$com.comment_content|stripcslashes}>
 											  </div>
 											</div>
 										</li>
@@ -86,36 +86,35 @@
 							</li>
 							<!--评论-->
 							<li>
-								<form name="addcomform" action="__URL__/addComment/id/<{$article.article_id}>" method="post">
+								<form name="addcomform">
 									 <div class="label"><label for="readme"></label></div>
 										<div class="field">
-										  	<textarea id="com_editor_id" name="com_content" placeholder="说些什么...（登录后评论）" style="width: 100%; height: 200px" name="content" ></textarea>
+											<textarea id="com_editor_id" name="com_content" placeholder="说些什么...(登录后评论)" style="width: 100%; height: 200px" name="content" ></textarea> 	
 
 											<script charset="utf-8" src="__APP__/kindeditor/kindeditor.js"></script>
 											<script charset="utf-8" src="__APP__/kindeditor/lang/zh_CN.js"></script>
 											<script charset="utf-8" src="__APP__/kindeditor/plugins/code/prettify.js"></script>
 											
 											<script>
-											        var editor;
+											        var comment_editor;
 													KindEditor.ready(function(K) {
-														editor = K.create('#com_editor_id', {
+														comment_editor = K.create('#com_editor_id', {
 															resizeType : 1,
 															allowPreviewEmoticons : false,
 															allowImageUpload : false,
 															autoHeightMode : true,
 															items : [
 																'bold', 'italic', 'underline',
-																'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'link', 'code']
+																'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'link', 'code'],
+
+															afterBlur: function(){this.sync();},	//将内容同步到textarea
 														});
 													});
 													prettyPrint();
 											</script>
-
-
-										  <input type="hidden" name="articleId" value="<{$article.article_id}>"/>
 										</div>
 										<br/>
-									 <div class="form-button"><button class="button float-right" type="submit">评论</button></div>
+									 <div class="form-button"><button class="button float-right" type="button" onclick="addComment(<{$article.article_authorId}>, <{$article.article_id}>,'<{$article.article_title}>')">评论</button></div>
 								</form>
 							</li>
 					  </div>

@@ -8,7 +8,7 @@ function logoutCharge(){
 	 		}
 	    },
 	    error: function(){
-	    	alertMsg("出错了","");
+	    	showTip("竟然出错了", 500);
 	    }
   	});
 }
@@ -39,20 +39,54 @@ function deleteUser(obj, delUserId){
 		 		}
 		    },
 		    error: function(){
-		    	alertMsg("出错了","");
+		    	showTip("竟然出错了", 500);
 		    }
 	  	});
     }
 }
 
 /*
-	通知用户
+	通知所有用户
+*/
+function notifyAllUser(obj){
+	var input = obj.parentNode.parentNode.getElementsByClassName('input')[0];
+	var message = $(input).val();
+	if (message!=null && message!=""){
+		var msgData = {
+			fromId: 0,
+			type: 1,
+			content: message,
+		};
+		$.ajax({ url: getRootPath() + "/Charge/notifyAllUser", 
+        	data: msgData,
+        	type: 'POST',
+		 	context: obj,
+		 	success: function(responseData){
+		 		if(responseData == "true"){
+		        	$(input).val('');
+		 		}
+		 		else{
+		 			alertMsg("通知失败",responseData);
+		 		}
+		    },
+		    error: function(){
+		    	showTip("竟然出错了", 500);
+		    }
+	  	});
+	}
+}
+
+
+/*
+	通知单个用户
 */
 function notifyUser(obj, toUserId){
 	var message=prompt("输入通知内容","");
 	if (message!=null && message!=""){
 		var msgData = {
+			fromId: 0,
 			userId: toUserId,
+			type: 1,
 			content: message,
 		};
 		$.ajax({ url: getRootPath() + "/Charge/notifyUser", 
@@ -68,7 +102,7 @@ function notifyUser(obj, toUserId){
 		 		}
 		    },
 		    error: function(){
-		    	alert("出错了");
+		    	showTip("竟然出错了", 500);
 		    }
 	  	});
 	}
@@ -93,7 +127,7 @@ function deleteArticle(obj, delUrl){
 		 		}
 		    },
 		    error: function(){
-		    	alertMsg("出错了","");
+		    	showTip("竟然出错了", 500);
 		    }
 	  	});
     }
@@ -122,7 +156,7 @@ function banArticle(obj, artId){
 			 		}
 			    },
 			    error: function(){
-			    	alertMsg("出错了","");
+			    	showTip("竟然出错了", 500);
 			    }
 		  	});
 	    }
@@ -147,7 +181,7 @@ function banArticle(obj, artId){
 			 		}
 			    },
 			    error: function(){
-			    	alertMsg("出错了","");
+			    	showTip("竟然出错了", 500);
 			    }
 		  	});
 	    }

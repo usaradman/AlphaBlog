@@ -29,9 +29,8 @@
 
 				<!--left-->
 				<div class="xs1 bg-white float-left text-center">
-				  	<div class="bg-main bg-inverse list-link border-white">
+				  	<div class="bg-main list-link border-white">
 					  <a href="?charge=index">首页</a>
-					  <a href="?charge=message">通知</a>
 					  <a href="?charge=user" class="active">用户</a>
 					  <a href="?charge=article">文章</a>
 					</div>
@@ -39,10 +38,28 @@
 					
 				<!--right-->
 				<div class="xs11 bg-white padding-small-top padding-small-right float-right" style="min-height:100px;">
+					
+					<div id="form_message" class="margin-top margin-large-bottom margin-small-left margin-small-right">
+						<div class="form-group">
+							<div class="label">
+								<label for="email">
+									全部通知&nbsp;</label>
+							</div>
+							<div class="field">
+								<textarea rows="5" class="input" placeholder="通知所有用户" ></textarea>
+							</div>
+						</div>
+						<div class="form-button">
+							<button class="button bg-sub float-right" type="button" onclick="notifyAllUser(this)" >发送通知</button>
+						</div>
+					</div>
+					<br/>
+
 					<div class="alert alert-red margin-small-bottom">
 						<span class="close rotate-hover"></span><strong>注意：</strong>这些是所有的用户，现在不可以删除。
 					</div>
-					<table class="table table-bordered margin-top">
+
+					<table class="table table-bordered margin-top margin-large-bottom">
 						<tr><th>序号</th><th>ID</th><th>用户名</th><th>email</th><th>signature</th><th>checked</th>
 							<th>visit</th><th>积分</th><th>级别</th><th>rank</th><th>操作</th></tr>
 
@@ -58,7 +75,7 @@
 						</volist>
 					</table>
 
-					<div align="right margin-big-top">
+					<div align="right margin-big-top margin-large-bottom">
 						<ul class="bg-white pagination pagination-group">
 						  <if condition="$currentpage gt 1">
 						  		<li><a href="?page=<{$currentpage-1}>">上一页</a></li>

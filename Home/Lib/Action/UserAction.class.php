@@ -77,7 +77,20 @@
 				$this->error("没有找到".$user->getError());
 			}
 		}
+		
 
+		/**
+		 * 给用户留言
+		 */
+		public function notifyUser($fromId, $userId, $type, $content){
+			$result = R('Message/notifyUser',array($fromId, $userId, $type, $content));
+			if($result){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+		}
 
 
 

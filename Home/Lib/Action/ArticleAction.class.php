@@ -65,39 +65,55 @@ class ArticleAction extends Action {
 	 */
 	private function getComment($curId){
 		$comment = M('comment');
-		$data = $comment->where('comment_articleid='.$curId)->select();
-		if($data){
-			$this->assign('comments', $data);
+		$result = $comment->where('comment_articleid='.$curId)->select();
+		if($result){
+			$coms = array();
+			foreach ($result as $com) {
+				$com['content'] = stripcslashes($com['content']);
+				$coms[] = $com;
+			}
+			$this->assign('comments', $coms);
 		}
 	}
 
 	/**
 	 * 添加评论
 	 */
-	public function addComment(){
+	public function addComment($authorId, $articleId, $articleTitle, $content){
 		if($this->checkAuthority()){
 			$comment = M('Comment');
 			$cUser = session('LoginUser');
-			$data['comment_articleid'] = $this->_post('articleId');
+			$data['comment_articleid'] = $articleId;
 			$data['comment_userid'] = $cUser['user_id'];
 			$data['comment_username'] =  $cUser['user_name'];
-			$data['comment_content'] = $_REQUEST['com_content'];
+			$data['comment_content'] = $content;
 			$data['article_checked'] = 0;
 			
 			if($comment->add($data)) {
 				$article = M('article');
-				$sql = 'update '.C('DB_PREFIX').'article set article_cmtnum=article_cmtnum+1 where article_id='.$this->_post('articleId');
+				$sql = 'update '.C('DB_PREFIX').'article set article_cmtnum=article_cmtnum+1 where article_id='.$articleId;
 				$article->execute($sql);
 
-				$this->success("评论成功");
+				//发送评论通知
+				$content = '<a class="text-blue" href="__APP__/user/'. $cUser['user_id'] . '.html" target="_blank">' . $cUser['user_name'] . '</a> 评论您的文章'.
+								'<a class="text-blue" href="__APP__/article/' . $articleId . '.html" target="_blank"> ' . $articleTitle . '</a>:  ' . $content;
+				
+				$fromId = $cUser['user_id'];
+				$userId = $authorId;
+				$type = 3;
+				$result = R('Message/notifyUser',array($fromId, $userId, $type, $content));
+				echo 'true';
+				return;
 		    }
 		    else{
 		    	echo '出错了';
-		        $this->error($comment->getError());
+		        echo 'false '.$comment->getError();
+		        return;
 		    }
 	    }
 		else{
-			$this->error('请先登录', U('/login'));
+			echo '请先登录';
+			return;
 		}
 	}
 

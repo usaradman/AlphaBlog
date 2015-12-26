@@ -13,10 +13,6 @@ class ChargeAction extends Action {
 
 				break;
 			}
-			case 'message':{
-
-				break;
-			}
 			case 'user':{
 				$this->assign('users', $this->getAllUsers($page));
 				break;
@@ -44,6 +40,44 @@ class ChargeAction extends Action {
 		return false;
 	}
 
+
+//#########################################################################################################
+//#										消息通知
+//#########################################################################################################
+
+	/**
+	 * 给所有用户发送通知
+	 */
+	public function notifyAllUser($fromId, $type, $content){
+		if(!$this->checkAuthority()){
+			echo 'Unauthorized';
+			return;
+		}
+		$result = R('Message/notifyAllUser',array($fromId, $type, $content));
+		if($result){
+			echo 'true';
+		}
+		else{
+			echo 'false';
+		}
+	}
+
+	/**
+	 * 给指定用户发送通知
+	 */
+	public function notifyUser($fromId, $userId, $type, $content){
+		if(!$this->checkAuthority()){
+			echo 'Unauthorized';
+			return;
+		}
+		$result = R('Message/notifyUser',array($fromId, $userId, $type, $content));
+		if($result){
+			echo 'true';
+		}
+		else{
+			echo 'false';
+		}
+	}
 
 
 //#########################################################################################################
@@ -152,29 +186,6 @@ class ChargeAction extends Action {
 		*/
 	}
 
-	/**
-	 * 给指定用户发送通知
-	 */
-	public function notifyUser($userId,$content){
-		if(!$this->checkAuthority()){
-			echo 'Unauthorized';
-			return;
-		} 
-		$message = M('message');
-		$msgData['fromid'] = 0;
-		$msgData['toid'] = $userId;
-		$msgData['type'] = 1;
-		$msgData['content'] = $content;
-		$msgData['checked'] = 0;
-
-		$result = $message->add($msgData);
-		if($result){
-			echo 'true';
-		}
-		else{
-			echo 'false '. $message->getError();
-		}
-	}
 
 //#########################################################################################################
 //#										登录 注销

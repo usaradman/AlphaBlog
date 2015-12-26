@@ -15,20 +15,6 @@
     }
 
     /**
-     * 获取每个用户未读的消息
-     */
-    function getMessagesByUser($userId){
-        $msg = M('message');
-        $result = $msg->where("toid = $userId")->select();
-        if($result){
-            return $result;
-        }else{
-            return array();
-        }
-    }
-
-
-    /**
      * 每个用户自己的分类,如果没有的话自动创建默认分类
      */
     function getCategoriesByUser($userId){

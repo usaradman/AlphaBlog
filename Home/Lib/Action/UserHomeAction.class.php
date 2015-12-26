@@ -86,7 +86,7 @@
 			$this->assign('description', $user['user_name'].', '.$user['user_signature']);
 			//文章分类
 	    	$this->assign('categories', getCategoriesByUser($user['user_id']));
-	    	$this->assign('messages', getMessagesByUser($user['user_id']));
+	    	$this->assign('messages', R('Message/getMessagesByUser',array($user['user_id'])));
 		}
 
 

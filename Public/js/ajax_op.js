@@ -1,5 +1,41 @@
 //#########################################################################################################
-//#										文章删除
+//#										评论操作
+//#########################################################################################################
+
+/*添加评论*/
+function addComment(authorId, articleId, articleTitle){
+	//comment_editor 为评论输入框的KindEditor对象
+	var com_content = comment_editor.text();
+	if(com_content === null || com_content === undefined || trim(com_content) == ""){
+		showTip("输入不能为空", 500);
+		return;
+	}
+	var comData = {
+		authorId:authorId,
+		articleId:articleId,
+		articleTitle:articleTitle,
+		content:comment_editor.html(),
+	};
+	$.ajax({ url: getRootPath() + "/Article/addComment", 
+		data: comData,
+		type: 'POST',
+	 	success: function(responseData){
+	 		if(responseData == "true"){
+	        	location.reload();
+	 		}
+	 		else{
+	 			alertMsg("评论失败 ",responseData);
+	 		}
+	    },
+	    error: function(responseData){
+	    	showTip("竟然出错了", 500);
+	    }
+  	});
+}
+
+
+//#########################################################################################################
+//#										文章操作
 //#########################################################################################################
 
 
@@ -12,11 +48,11 @@ function deleteArticle(obj, delUrl){
 		        	this.parentNode.removeChild(this);
 		 		}
 		 		else{
-		 			alertMsg("删除失败",responseData);
+		 			alertMsg("删除失败 ",responseData);
 		 		}
 		    },
 		    error: function(){
-		    	alertMsg("出错了","");
+		    	showTip("竟然出错了", 500);
 		    }
 	  	});
     }
@@ -27,7 +63,7 @@ function deleteArticle(obj, delUrl){
 
 
 //#########################################################################################################
-//#										文章分类
+//#										分类操作
 //#########################################################################################################
 
 
@@ -37,7 +73,7 @@ function deleteArticle(obj, delUrl){
 function addCategory(){
 	var cName = $("#addCategoryNameInput").val();
 	if(cName === null || cName === undefined || trim(cName) == ""){
-		alert("名称不能为空");
+		showTip("名称不能为空", 500);
 		return;
 	}
 	var categoryData = {
@@ -64,7 +100,7 @@ function addCategory(){
 	 		}
 	    },
 	    error: function(){
-	    	alertMsg("出错了", "");
+	    	showTip("竟然出错了", 500);
 	    }
   	});
 }
@@ -95,7 +131,7 @@ function modifyCategory(obj,id){
 	 		}
 	    },
 	    error: function(){
-	    	alertMsg("出错了", "");
+	    	showTip("竟然出错了", 500);
 	    }
   	});
 
@@ -106,7 +142,7 @@ function modifyCategory(obj,id){
 */
 function deleteCategory(obj, delId, cateSize){
 	if(cateSize != 0){
-		alert("当前分类文章不为空");
+		showTip("当前分类文章不为空", 500);
 		return;
 	}
 	var delData = {
@@ -123,7 +159,7 @@ function deleteCategory(obj, delId, cateSize){
 	 		}
 	    },
 	    error: function(){
-	    	alertMsg("出错了", "");
+	    	showTip("竟然出错了", 500);
 	    }
   	});
 }
@@ -131,6 +167,38 @@ function deleteCategory(obj, delId, cateSize){
 //#########################################################################################################
 //#										Message 操作
 //#########################################################################################################
+
+function leaveMessage(obj, fromId, toId){
+	if(fromId == -1){
+		showTip("请先登录", 500);
+		return;
+	}
+	var message=prompt("输入留言","");
+	if (message!=null && message!=""){
+		var msgData = {
+			fromId: fromId,
+			userId: toId,
+			type: 2,
+			content: message,
+		};
+		$.ajax({ url: getRootPath() + "/User/notifyUser", 
+        	data: msgData,
+        	type: 'POST',
+		 	context: obj,
+		 	success: function(responseData){
+		 		if(responseData == "true"){
+		        	showTip("对方已收到留言", 500);
+		 		}
+		 		else{
+		 			alertMsg("通知失败",responseData);
+		 		}
+		    },
+		    error: function(){
+		    	showTip("竟然出错了", 500);
+		    }
+	  	});
+	}
+}
 
 /*
 	标记为已读
@@ -150,7 +218,7 @@ function markMessageChecked(msgId){
 	 		}
 	    },
 	    error: function(){
-	    	alertMsg("出错了", "");
+	    	showTip("竟然出错了", 500);
 	    }
   	});
 }
@@ -173,7 +241,7 @@ function deleteMessage(msgId){
 	 		}
 	    },
 	    error: function(){
-	    	alertMsg("出错了", "");
+	    	showTip("竟然出错了", 500);
 	    }
   	});
 }
@@ -215,7 +283,7 @@ function modifyUserSignature(){
 		 		}
 		    },
 		    error: function(){
-		    	alertMsg("出错了", "");
+		    	showTip("竟然出错了", 500);
 		    }
 	  	});
 	}
@@ -241,7 +309,7 @@ function modifyUserEmail(){
 		 		}
 		    },
 		    error: function(){
-		    	alertMsg("出错了", "");
+		    	showTip("竟然出错了", 500);
 		    }
 	  	});
 	}
@@ -258,8 +326,8 @@ function modifyUserHeadIcon(btn){
         success: function(responseData){   
             $(btn).attr("disabled","disabled");
         },
-        error: function (data, status, e){  
-            alertMsg("出错了", "");
+        error: function (){  
+            showTip("竟然出错了", 500);
         }  
     }); 
 }

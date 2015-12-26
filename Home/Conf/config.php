@@ -10,6 +10,7 @@ $basicConfig = array(
 	'URL_MODEL'                =>2,
     'TMPL_L_DELIM'              =>'<{',
     'TMPL_R_DELIM'              =>'}>',
+    'VAR_FILTERS'               =>'', //配置全局的变量过滤
     'SHOW_PAGE_TRACE'           =>false,        //开启页面Trace
     'URL_ROUTER_ON'             =>true,       //开启路由
     'URL_CASE_INSENSITIVE'      =>false,        //大小写不敏感

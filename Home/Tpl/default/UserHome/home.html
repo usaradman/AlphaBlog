@@ -92,7 +92,7 @@
 								<volist name="messages" id="msg">
 									<if condition="($msg.checked eq 0) AND ($msg.type eq 1)" >
 										<li class="margin-bottom">
-											<div class="alert alert-yellow"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="标记已读" onclick="markMessageChecked(<{$msg.id}>)" ></span><strong>系统通知：</strong><{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
+											<div class="alert alert-red"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="标记已读" onclick="markMessageChecked(<{$msg.id}>)" ></span><strong>系统通知：</strong><{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
 										</li>
 									<elseif condition="($msg.checked eq 0) AND ($msg.type eq 2)"/>
 										<li class="margin-bottom">
@@ -100,7 +100,7 @@
 										</li>
 									<elseif condition="($msg.checked eq 0) AND ($msg.type eq 3)"/>
 										<li class="margin-bottom">
-											<div class="alert alert-green"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="标记已读" onclick="markMessageChecked(<{$msg.id}>)" ></span><strong>新评论：</strong>新评论：<{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
+											<div class="alert alert-yellow"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="标记已读" onclick="markMessageChecked(<{$msg.id}>)" ></span><strong>新评论：</strong><{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
 										</li>
 									<else />
 									</if>

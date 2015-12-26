@@ -1,7 +1,13 @@
-<Ifmodule mod_rewrite.c>
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+#禁止目录列表
+<Files *>
+	Options -Indexes
+</Files>
 
+
+#路由重写
+<Ifmodule mod_rewrite.c>
+	RewriteEngine on
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
 </Ifmodule>

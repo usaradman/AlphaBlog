@@ -31,8 +31,14 @@
 
 						<div class="bg-white padding margin-top">
 							<center>
-							  <a href="#"><button class="button border-green"><span class="icon-comment-o text-green margin-small-right"></span><b>留言</b></button></a>
-							  <a href="#"><button class="button tips border-blue margin-big-left" data-toggle="click" data-place="top" title="" content="关注成功" data-target="#user_icon" ><span class="icon-plus text-blue margin-small-right"></span><b>关注</b></button></a>
+								<if condition="$_SESSION['LoginUser']['user_id'] eq $cur_user['user_id']" >
+									<a href="javascript:;"><button class="button border-green" disabled="disabled" onclick="leaveMessage(this,<{$Think.session.LoginUser.user_id|default=-1}>, <{$cur_user.user_id}>)"><span class="icon-comment-o text-green margin-small-right"></span><b>留言</b></button></a>
+									<a href="javascript:;"><button class="button tips border-blue margin-big-left" data-toggle="click" data-place="top" title="" content="关注成功" disabled="disabled" data-target="#user_icon" ><span class="icon-plus text-blue margin-small-right"></span><b>关注</b></button></a>
+								<else />
+									<a href="javascript:;"><button class="button border-green" onclick="leaveMessage(this,<{$Think.session.LoginUser.user_id|default=-1}>, <{$cur_user.user_id}>)"><span class="icon-comment-o text-green margin-small-right"></span><b>留言</b></button></a>
+									<a href="javascript:;"><button class="button tips border-blue margin-big-left" data-toggle="click" data-place="top" title="" content="关注成功" data-target="#user_icon" ><span class="icon-plus text-blue margin-small-right"></span><b>关注</b></button></a>
+								</if>
+								
 							</center>
 						</div>
 

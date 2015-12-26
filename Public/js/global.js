@@ -30,9 +30,14 @@ function trim(str){
 /*弹框显示*/
 function alertMsg(msg, exMsg){
 	if(JS_ISDEBUG){
-		alert(msg + exMsg);
+		$("#msg-tip").html(msg + exMsg).show(300).delay(1000).hide(300);
 	}
 	else{
-		alert(msg);
+		$("#msg-tip").html(msg).show(300).delay(1000).hide(300);
 	}
+}
+
+/*提示框显示*/
+function showTip(msg, time){
+	$("#msg-tip").html(msg).show(300).delay(time).hide(300);
 }

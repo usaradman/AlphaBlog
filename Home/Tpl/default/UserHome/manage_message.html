@@ -56,7 +56,7 @@
 									</li>
 								<elseif condition="$msg.type eq 3"/>
 									<li class="margin-bottom">
-										<div class="alert alert-light-gray"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="点击删除" onclick="deleteMessage(<{$msg.id}>)"></span><strong>新评论：</strong>新评论：<{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
+										<div class="alert alert-light-gray"><span class="close rotate-hover tips" data-toggle="hover" data-place="right" title="点击删除" onclick="deleteMessage(<{$msg.id}>)"></span><strong>新评论：</strong><{$msg.content}>	<br/><br/><div class="text-gray text-right"><{$msg.createtime}></div></div>
 									</li>
 								</if>
 							</volist>
