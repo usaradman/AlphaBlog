@@ -27,6 +27,10 @@
 				$this->assign('followNum', $followNum);
 				$this->assign('fanNum', $fanNum);
 
+				//是否已经关注
+				$loginUser = session('LoginUser');
+				$this->assign('isFollowed', $this->isFollowed($loginUser['user_id'], $id));
+
 				//获取用户分类
 				$this->assign('categories', getCategoriesByUser($id));
 
@@ -93,5 +97,46 @@
 		}
 
 
+		private function isFollowed($fromId, $toId){
+			$follow = D('follow');
+			$exist = $follow->where('user_id='.$fromId.' AND follow_id='.$toId)->select();
+			if($exist){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+
+
+		/**
+		 * 关注用户  
+		 */
+		public function follow($fromId, $toId){
+			$follow = D('follow');
+			$followData['user_id'] = $fromId;
+			$followData['follow_id'] = $toId;
+			$result = $follow->add($followData);
+			if($result){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+		}
+
+		/**
+		 * 取消关注
+		 */
+		public function unFollow($fromId, $toId){
+			$follow = D('follow');
+			$result = $follow->where('user_id = '.$fromId.' AND follow_id = '.$toId)->delete();
+			if($result){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+		}
 
 	}

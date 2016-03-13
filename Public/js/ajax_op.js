@@ -248,6 +248,68 @@ function deleteMessage(msgId){
 
 
 //#########################################################################################################
+//#										 粉丝操作
+//#########################################################################################################
+
+function follow(obj, fromId, toId){
+	if(fromId == -1){
+		showTip("请先登录", 500);
+		return;
+	}
+	var followData = {
+		fromId: fromId,
+		toId: toId,
+	};
+	$.ajax({ url: getRootPath() + "/User/follow", 
+    	data: followData,
+    	type: 'POST',
+	 	context: obj,
+	 	success: function(responseData){
+	 		if(responseData == "true"){
+	        	showTip("关注成功", 500);
+	        	$(obj).attr("disabled","disabled");
+	 		}
+	 		else{
+	 			alertMsg("关注失败",responseData);
+	 		}
+	    },
+	    error: function(){
+	    	showTip("竟然出错了", 500);
+	    }
+  	});
+}
+
+function unFollow(obj, fromId, toId){
+	if(fromId == -1){
+		showTip("请先登录", 500);
+		return;
+	}
+	var followData = {
+		fromId: fromId,
+		toId: toId,
+	};
+	$.ajax({ url: getRootPath() + "/User/unFollow", 
+    	data: followData,
+    	type: 'POST',
+	 	context: obj,
+	 	success: function(responseData){
+	 		if(responseData == "true"){
+	        	showTip("取消关注成功", 500);
+	        	$(obj).attr("disabled","disabled");
+	 		}
+	 		else{
+	 			alertMsg("取消关注失败",responseData);
+	 		}
+	    },
+	    error: function(){
+	    	showTip("竟然出错了", 500);
+	    }
+  	});
+}
+
+
+
+//#########################################################################################################
 //#										用户资料修改
 //#########################################################################################################
 

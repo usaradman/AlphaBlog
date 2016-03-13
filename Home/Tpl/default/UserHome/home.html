@@ -45,12 +45,12 @@
 							  		</li>
 								    <li>
 							  			<div class="media media-x clearfix radius text-center">
-										    <div class="media-body"><a href="#"><strong><{$followNum|default=0}></strong>关注</a></div>
+										    <div class="media-body"><a href="#"><strong><{$followersNumber|default=0}></strong>关注</a></div>
 										 </div>
 							  		</li>
 							  		<li>
 							  			<div class="media media-x clearfix radius text-center">
-										    <div class="media-body"><a href="#"><strong><{$fanNum|default=0}></strong>粉丝</a></div>
+										    <div class="media-body"><a href="#"><strong><{$fansNumber|default=0}></strong>粉丝</a></div>
 										 </div>
 							  		</li>
 							</ul>
@@ -113,22 +113,18 @@
 						  <div class="panel-head bg-gray-light border-white"><strong>最新粉丝</strong></div>
 						  <div class="panel-body">
 							<ul class="list-inline">
-								<li class="margin-bottom">
-									<div class="media">
-									  <a href="#">
-									    <img src="__PUBLIC__/images/icon-head.png" width="64" height="64"  class="img-border radius-circle" />
-									  </a>
-									  <div class="media-body text-center">usar</div>
-									</div>
-								</li>
-								<li class="margin-bottom">
-									<div class="media">
-									  <a href="#">
-									    <img src="__PUBLIC__/images/icon-head.png" width="64" height="64"  class="img-border radius-circle" />
-									  </a>
-									  <div class="media-body text-center">admin</div>
-									</div>
-								</li>
+
+								<volist name="fans" id="fan">
+									<li class="margin-bottom">
+										<div class="media">
+										  <a href="__APP__/user/<{$fan.user_id}>.html" target="_blank">
+										    <img src="<{:U('User/getUserHeaderFromUserId',array('userId'=>$fan['user_id']))}>" width="64" height="64"  class="img-border radius-circle" />
+										  </a>
+										  <div class="media-body text-center"><{$fan.user_name}></div>
+										</div>
+									</li>
+								</volist>
+								
 							</ul>
 						  </div>
 						</div>

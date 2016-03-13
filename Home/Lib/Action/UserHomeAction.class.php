@@ -87,6 +87,15 @@
 			//文章分类
 	    	$this->assign('categories', getCategoriesByUser($user['user_id']));
 	    	$this->assign('messages', R('Message/getMessagesByUser',array($user['user_id'])));
+
+	    	$modelUser = D('User');
+	    	$fans = $modelUser->getFans($user['user_id']);
+	    	$fols = $modelUser->getFollowers($user['user_id']);
+	    	$this->assign('fans',$fans);
+	    	$this->assign('fansNumber',count($fans));
+	    	$this->assign('followers', $fols);
+	    	$this->assign('followersNumber', count($fols));
+
 		}
 
 

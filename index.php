@@ -10,5 +10,6 @@
 	
 	require THINK_PATH . 'ThinkPHP.php';
 	
+	//TODO 首先要检查安装，未安装的话跳转到安装界面，安装数据库和建立目录
 
 ?>

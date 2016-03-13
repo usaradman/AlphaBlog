@@ -4,7 +4,7 @@ class ChargeAction extends Action {
 
 	public function index($charge='index', $page=1){
 		if(!$this->checkAuthority()){
-			U('Charge/login', array(),'',true);
+			U('Charge/login', array(),'html',true);
 			return;
 		}
 		$this->assign('currentpage', $page);
@@ -192,8 +192,8 @@ class ChargeAction extends Action {
 //#########################################################################################################
 
 
-	public function loginCharge($name='', $passwd=''){
-		if($name=='usar' && $passwd=='usar'){
+	public function loginCharge($username='', $password=''){
+		if($username=='usar' && $password=='usar'){
 			session('LoginCharge', 'usar : '. date('y-m-d :i:s',time()));
 			U('Charge/index', array(),'html',true);
 			return;
