@@ -20,3 +20,11 @@
 	    $qian=array(" ","　","\t","\n","\r");$hou=array("","","","","");
 	    return str_replace($qian,$hou,$str);    
 	}
+
+	/*
+	function genRandInt($range)
+	{
+		$arr=range(1,$range);
+		shuffle($arr);
+		return $arr[0];
+	}*/

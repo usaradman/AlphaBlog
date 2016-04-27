@@ -23,9 +23,24 @@ class ArticleAction extends Action {
 	 */
 	public function show($id){
 		$this->assign('LatestArticles', getLatest());
+		$this->assign('allTags', getAllTags());
+
 		$articles = M('article');
 		$data = $articles->find($id);
 		if($data){
+			//上一篇
+			$pre = $articles->where('article_id<'.$id.' AND article_authorId='.$data['article_authorId'])
+					->field('article_id, article_title')->find();
+			if($pre)
+				$this->assign('preArticle', $pre);
+			
+			//下一篇
+			$next = $articles->where('article_id>'.$id.' AND article_authorId='.$data['article_authorId'])
+					->field('article_id, article_title')->find();
+			if($next)
+				$this->assign('nextArticle', $next);
+
+
 			$data['article_content'] = stripcslashes($data['article_content']);
 			$this->assign('article', $data);
 			$this->getComment($this->_get('id'));

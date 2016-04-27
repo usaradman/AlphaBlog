@@ -6,7 +6,8 @@
 		public function index(){
 			$this->assign('LatestArticles', getLatest());
         	$this->assign('categories', getCategory());
-
+        	$this->assign('allTags', getAllTags());
+        	
 
 			$this->type = $this->_get('type');
 			$this->typevalue = $this->_get('typevalue');

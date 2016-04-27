@@ -1,12 +1,12 @@
 	<include file="./Home/Tpl/default/Include/header.html"/>
   
 	
-    <div class="container" style="margin-top:20px; ">
+    <div class="container margin-big-top" >
 			<!-- main body -->
 			<div class="line">
-				<div class="xs10 x1-move">	
+				<div class="xs12 padding-large-right padding-large-left">
 					  <!--left-->
-					  <div class="xl8" style="padding-right:6px;">
+					  <div class="xl9 padding-right">
 							
 							<ul class="list-unstyle">
 								<li>
@@ -36,16 +36,8 @@
 												</div>
 											</div>
 											<div class="panel-foot bg-white padding-small border-none">
-													<span class="icon-folder-open text-small" />
+													<span class="icon-th-large text-small" />
 													<a href="__APP__/articles/category/<{$article.article_category}>"><span class="tag bg-white"><span class="text-gray"><{$article.article_category}></span></span></a>
-													<volist name="tags" id="tag">
-														<if condition="($tag.tag_id+1)%2 eq 0">
-															<a href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-blue"><{$tag.tag_name}></span></a>
-														<else />
-															<a href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-green"><{$tag.tag_name}></span></a>
-														</if>
-														
-													</volist>
 
 													<div class="float-right">
 													<p class="text-right">

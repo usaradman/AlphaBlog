@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <title>Alpha Blog | Regist</title>
+    <meta name="keywords" content="<{$keywords}>" />
+    <meta name="description" content="<{$description}>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="__PUBLIC__/css/pintuer.css">
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <script src="__PUBLIC__/js/pintuer.js"></script>
+    <script src="__PUBLIC__/js/respond.js"></script>
+    <script src="__PUBLIC__/js/global.js"></script>
+    <script src="__PUBLIC__/js/chargeOp.js"></script>
+  </head>
+
+  <body class="bg-white" style="background-image: url(__PUBLIC__/images/charge_bg.jpg);">
+
+  	<div class="container">
+		<div class="line">
+			<div class="xs6 xm4 xs3-move xm4-move">
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<form action="__APP__/Login/rRegist.html" method="post"  enctype="multipart/form-data" >
+					<div class="panel padding bg-white">
+						<div class="text-center">
+							<br>
+							<h2><strong><a class="text" target="_blank" href="__APP__">AlphaBlog</a> 注册</strong></h2></div>
+						<div class="" style="padding:30px;">
+							<div class="form-group">
+								<div class="field field-icon-right">
+									<input type="text" class="input" name="username" placeholder="注册账号" data-validate="required:请填写账号,length#>=3:账号长度不符合要求,ajax#__APP__/Login/isUserExist/username/{value}:用户已注册" />
+									<span class="icon icon-user"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="field field-icon-right">
+									<input type="password" class="input" name="tpassword" placeholder="注册密码" data-validate="required:请填写密码,length#>=3:密码长度不符合要求" />
+									<span class="icon icon-key"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="field field-icon-right">
+									<input type="password" class="input" name="confirm" placeholder="重复密码" data-validate="required:请填写密码,repeat#tpassword:两次输入的密码不一致" />
+									<span class="icon icon-key"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="field field-icon-right">
+									<input type="text" class="input" name="email" placeholder="注册邮箱" data-validate="required:请填写邮箱,email:邮箱格式错误" />
+									<span class="icon icon-cloud"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="field">
+									<a class="button input-file" href="javascript:void(0);">+ 上传头像 (100X100)<input id="uploadimg" name="headicon" size="100" type="file"/></a>
+									<img id="imgpreview" src="" width="100" height="100" style="display:none;"/>
+									<script type="text/javascript">
+										$(function(){
+											$('#uploadimg').change(function(){
+												var file = this.files[0]; //选择上传的文件
+												var r = new FileReader();
+												r.readAsDataURL(file); //Base64
+												$(r).load(function(){
+													$('#imgpreview')[0].style.display = "block";
+													$('#imgpreview')[0].src = this.result;
+												});
+											});
+										});
+									</script>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="field field-icon-right">
+									<textarea name="signature" class="input" rows="5" cols="50" placeholder="个性签名"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="field">
+									<button class="button button-block bg-main text-big">立即注册</button>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="field text-center">
+									<p class="text-muted text-center"><a class="" href="__APP__/login.html">返回登录</a>
+									</p>
+								</div>
+							</div>
+							<div class="text-right text-small text-gray padding-top">基于<a class="text-gray" target="_blank" href="http://www.pintuer.com">拼图前端框架</a> · <a class="text-gray" target="_blank" href="http://www.thinkphp.cn">ThinkPHP</a>构建</div>
+						</div>
+					</div>
+				</form>
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

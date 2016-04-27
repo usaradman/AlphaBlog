@@ -6,12 +6,18 @@ class IndexAction extends Action {
     	$this->show($data);
         $this->assign('LatestArticles', getLatest());
         $this->assign('categories', getCategory());
+        $this->assign('allTags', getAllTags());
     	$this->display();
     }
 
     public function _empty(){
         $this->index();
     }
+
+    public function about(){
+        $this->display('about');
+    }
+
 
     /**
      * 传入页数,每页15条

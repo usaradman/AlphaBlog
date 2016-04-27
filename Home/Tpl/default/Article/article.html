@@ -7,11 +7,11 @@
 	</style>
     <div class="container margin-big-top">
 			<!-- main body -->
-			<div class="line padding-large-right padding-large-left">
+			<div class="line">
 				<div class="xs12 padding-large-right padding-large-left">	
 					  <!--left-->
-					  <div class="xl8 padding-right">
-						<ul style="list-style:none;">
+					  <div class="xl9 padding-right">
+						<ul class="list-unstyle">
 							<li>
 								<!--导航-->
 								<ul class="bread bg-white" >
@@ -20,12 +20,12 @@
 								</ul>
 							</li>
 							<li>
-								<div class="detail text-default height margin-big-bottom bg-white padding-big-top padding-big-bottom padding-large-left padding-large-right">
+								<div class="detail text-default height margin-big-bottom bg-white padding-big-top padding-big-bottom padding-large-left padding-large-right" style="overflow:hidden;">
 									<center><h1 class="margin-top" ><{$article.article_title}></h1></center><br/>
 									<center>
 										<h5 class="text-small text-gray">时间：<{$article.article_createdate}> 
 											&nbsp;作者：<a class="text-blue text-small" href="__APP__/user/<{$article.article_authorId}>.html"><{$article.article_author}></a>
-											&nbsp;来源：Insist Blog
+											&nbsp;来源：Alpha Blog
 										</h5>
 									</center>
 									<br/><br/>
@@ -49,7 +49,12 @@
 
 										&nbsp;&nbsp;&nbsp;
 									</div>
-									<br/>
+
+									<br/><br/>
+									<div class="padding-small margin-bottom">
+										<span class="float-left"><span class="icon-angle-double-left"></span><a href="__APP__/article/<{$preArticle.article_id|default=$article['article_id']}>.html"> <{$preArticle.article_title|default=已经是第一篇了}></a></span>
+										<span class="float-right"><a href="__APP__/article/<{$nextArticle.article_id|default=$article['article_id']}>.html"><{$nextArticle.article_title|default=已经是最后一篇了}> </a><span class="icon-angle-double-right"></span></span>
+									</div>
 								</div>
 								
 							</li>
@@ -59,7 +64,14 @@
 									<div class="pane-body">
 										<span>标签：</span>
 										<volist name="tags" id="tag">
-											<a class="margin-right" href="__APP__/articles/tag/<{$tag.tag_id}>"><span class="tag bg-blue"><{$tag.tag_name}></span></a>
+											<switch name="i%5" >
+									  		<case value="4" break="1"><a class="tag bg-blue shake-hover" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="3" break="1"><a class="tag bg-main shake-hover" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="2" break="1"><a class="tag bg-yellow shake-hover" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="1" break="1"><a class="tag bg-red shake-hover" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="0" break="1"><a class="tag bg shake-hover" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<default /><a class="tag bg-blue shake-hover" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;
+											</switch>
 										</volist>
 									</div>
 								</div>

@@ -22,8 +22,8 @@
 
 				$this->assign('cur_user', $result[0]);
 				$follow = D('Follow');
-				$followNum = $follow->where('follow_id='.$id)->count();
-				$fanNum = $follow->where('user_id='.$id)->count();
+				$followNum = $follow->where('user_id='.$id)->count();
+				$fanNum = $follow->where('follow_id='.$id)->count();
 				$this->assign('followNum', $followNum);
 				$this->assign('fanNum', $fanNum);
 

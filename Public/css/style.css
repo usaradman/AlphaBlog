@@ -1,0 +1,13 @@
+
+#tags a{height:26px; line-height:26px;padding-right:6px;}
+#tags .tags0{}
+#tags .tags1{color:#C00; font-size:24px;}
+#tags .tags2{color:#030; font-size:16px;}
+#tags .tags3{color:#00F;}
+#tags .tags4{ font-size:16px;}
+#tags .tags5{color:#C00; font-size:20px;}
+#tags .tags6{color:#F06 font-size:20px;}
+#tags .tags7{color:#030; font-weight:bold; font-size:18px;}
+#tags .tags8{color:#F06; font-weight:bold;}
+#tags .tags9{color:#C00; font-weight:bold;font-size:16px;}
+#tags a:hover{ color:#F00; text-decoration:underline;}

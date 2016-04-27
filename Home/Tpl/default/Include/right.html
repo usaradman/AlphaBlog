@@ -1,32 +1,55 @@
 <!--right-->
-					  <div class="xl4 padding-left">
+					  <div class="xl3">
 							<ul style="list-style:none;">
 							<li>
 								<div class="panel margin-bottom bg-white border-white">
 								  <div class="panel-body"><center><a href="__APP__/article/add.html"><button class="button button-big bg-green"><span class="icon-pencil"></span>&nbsp;发&nbsp;布&nbsp;文&nbsp;章</button></a></center></div>
 								</div>
 							</li>
+
+							
 							<li class="margin-large-top">
 								<div class="panel margin-bottom bg-white border-white">
-								  <div class="panel-head"><strong>推荐文章</strong></div>
+								  <div class="panel-head"><strong><span class="icon-file-text-o">&nbsp;&nbsp;</span>推荐文章</strong></div>
 								  <ul class="list-group">
 								  	<volist name="LatestArticles" id="article">
-										<li><a href="__APP__/Article/<{$article.article_id}>.html"><span class="icon-file-text-o">&nbsp;&nbsp;<{$article.article_title|msubstr=0,25,'utf-8',false}></a></li>
+										<li><a href="__APP__/Article/<{$article.article_id}>.html"><span class="icon-file-text-o">&nbsp;&nbsp;</span><{$article.article_title|msubstr=0,25,'utf-8',false}></a></li>
 									</volist>
 								  </ul>
 								</div>
 							</li>
-							<!--
-							<li>
+							
+							<li class="margin-large-top">
 								<div class="panel margin-bottom bg-white border-white">
-								  <div class="panel-head"><strong>分类</strong></div>
-								  <ul class="list-group">
-								  	<volist name="categories" id="category">
-										<li><a href="__APP__/articles/category/<{$category.category_id}>"><span class="icon-dot-circle-o"></span>&nbsp;&nbsp;<{$category.category_name}><span class="float-right badge"><{$category.category_size}></span></a></li>
-									</volist>
-								  </ul>
+								  <div class="panel-head"><strong><span class="icon-tag">&nbsp;&nbsp;</span>标签</strong></div>
+								  	<div id="tags" class="padding" style="word-wrap:break-word; display:block;">
+									  	<volist name="allTags" id="tag">
+									  		<switch name="i%10" >
+									  		<case value="0" break="1"><a class="tags1" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="1" break="1"><a class="tags2" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="2" break="1"><a class="tags9" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="3" break="1"><a class="tags6" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="4" break="1"><a class="tags3" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="4" break="1"><a class="tags4" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="4" break="1"><a class="tags8" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<case value="4" break="1"><a class="tags7" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;</case>
+											<default /><a class="tags5" href="__APP__/articles/tag/<{$tag.tag_id}>"><{$tag.tag_name}></a>&nbsp;
+											</switch>
+										</volist>
+									</div>
 								</div>
 							</li>
-						-->
+
+							<li class="margin-large-top">
+								<div class="panel margin-bottom bg-white border-white">
+									<div class="panel-head"><strong><span class="icon-link">&nbsp;&nbsp;</span>友情链接</strong></div>
+									<ul class="margin-small-top list-inline" id="tags" >
+										<li><a href="http://www.baidu.com" target="_blank" >百度一下</a></li>
+										<li><a href="http://www.pintuer.com" target="_blank" >拼图前端框架</a></li>
+										<li><a href="http://github.com/usaradman" target="_blank" >GitHub</a></li>
+									</ul>
+								</div>
+							</li>
+
 						</ul>
 					</div>

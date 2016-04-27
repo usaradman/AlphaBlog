@@ -42,12 +42,29 @@
         $tags = M('category');
         $result = $tags->select();
         if($result){
-           return $result;
+            return $result;
         }
         else {
-           return array();
+            return array();
         }
     }
+
+
+    /**
+     * 获取所有tag
+     */
+    function getAllTags(){
+        $tags = M('tag');
+        $result = $tags->select();
+        if($result){
+            return $result;
+        }
+        else {
+            return array();
+        }
+    }
+
+
 
     /**
      * 给用户加积分

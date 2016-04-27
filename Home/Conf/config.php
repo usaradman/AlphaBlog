@@ -32,6 +32,7 @@ $basicConfig = array(
                 'login$'                                => 'Login/index',
                 'regist$'                               => 'Login/regist',
                 'logout$'                               => 'Login/logout',
+                'about'                                 => 'Index/about'
                 //'admin'                                 => 'Charge/index.html',
              ),
     'DEFAULT_THEME'  => 'default',

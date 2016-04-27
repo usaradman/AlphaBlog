@@ -63,7 +63,7 @@
 		 */
 		public function regist(){
 			$this->type = 2;
-			$this->display('login');
+			$this->display('regist');
 		}
 
 		/**

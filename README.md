@@ -5,8 +5,6 @@
 
 ## 使用
 
-1.创建数据库insistblog，然后执行Document里面的sql文件创建表
+1.创建数据库alphablog，然后执行Document里面的sql文件创建表
 
 2.解压Document里面的ThinkPHP.rar和kindEditor.rar放于和index.php同一级目录
-
-3.项目名称为AlphaBlog
